@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BetweenUsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblPost">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfPost" Type="date" Nullable="false" />
+          <Property Name="PostText" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="NumberOfLikes" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPostLikes">
+          <Key>
+            <PropertyRef Name="PostLikeID" />
+          </Key>
+          <Property Name="PostLikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRelationship">
+          <Key>
+            <PropertyRef Name="RelationshipID" />
+          </Key>
+          <Property Name="RelationshipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RelationshipStatus" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="User1ID" Type="int" Nullable="false" />
+          <Property Name="User2ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserLocation" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="UserPassword" Type="char" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblPost__UserID__5F7E2DAC">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblPost" Type="Self.tblPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPostLi__PostI__625A9A57">
+          <End Role="tblPost" Type="Self.tblPost" Multiplicity="1" />
+          <End Role="tblPostLikes" Type="Self.tblPostLikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPost">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="tblPostLikes">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPostLi__UserI__634EBE90">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblPostLikes" Type="Self.tblPostLikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblPostLikes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRelati__User1__5BAD9CC8">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRelationship">
+              <PropertyRef Name="User1ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRelati__User2__5CA1C101">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRelationship">
+              <PropertyRef Name="User2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BetweenUsDBModelStoreContainer">
+          <EntitySet Name="tblPost" EntityType="Self.tblPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPostLikes" EntityType="Self.tblPostLikes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRelationship" EntityType="Self.tblRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblPost__UserID__5F7E2DAC" Association="Self.FK__tblPost__UserID__5F7E2DAC">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblPost" EntitySet="tblPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPostLi__PostI__625A9A57" Association="Self.FK__tblPostLi__PostI__625A9A57">
+            <End Role="tblPost" EntitySet="tblPost" />
+            <End Role="tblPostLikes" EntitySet="tblPostLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPostLi__UserI__634EBE90" Association="Self.FK__tblPostLi__UserI__634EBE90">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblPostLikes" EntitySet="tblPostLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRelati__User1__5BAD9CC8" Association="Self.FK__tblRelati__User1__5BAD9CC8">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRelationship" EntitySet="tblRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRelati__User2__5CA1C101" Association="Self.FK__tblRelati__User2__5CA1C101">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRelationship" EntitySet="tblRelationship" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BetweenUsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblPost">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfPost" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PostText" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumberOfLikes" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblPost__UserID__5F7E2DAC" FromRole="tblPost" ToRole="tblUser" />
+          <NavigationProperty Name="tblPostLikes" Relationship="Self.FK__tblPostLi__PostI__625A9A57" FromRole="tblPost" ToRole="tblPostLikes" />
+        </EntityType>
+        <EntityType Name="tblPostLike">
+          <Key>
+            <PropertyRef Name="PostLikeID" />
+          </Key>
+          <Property Name="PostLikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblPost" Relationship="Self.FK__tblPostLi__PostI__625A9A57" FromRole="tblPostLikes" ToRole="tblPost" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblPostLi__UserI__634EBE90" FromRole="tblPostLikes" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblRelationship">
+          <Key>
+            <PropertyRef Name="RelationshipID" />
+          </Key>
+          <Property Name="RelationshipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RelationshipStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User1ID" Type="Int32" Nullable="false" />
+          <Property Name="User2ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblRelati__User1__5BAD9CC8" FromRole="tblRelationship" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="Self.FK__tblRelati__User2__5CA1C101" FromRole="tblRelationship" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblPosts" Relationship="Self.FK__tblPost__UserID__5F7E2DAC" FromRole="tblUser" ToRole="tblPost" />
+          <NavigationProperty Name="tblPostLikes" Relationship="Self.FK__tblPostLi__UserI__634EBE90" FromRole="tblUser" ToRole="tblPostLikes" />
+          <NavigationProperty Name="tblRelationships" Relationship="Self.FK__tblRelati__User1__5BAD9CC8" FromRole="tblUser" ToRole="tblRelationship" />
+          <NavigationProperty Name="tblRelationships1" Relationship="Self.FK__tblRelati__User2__5CA1C101" FromRole="tblUser" ToRole="tblRelationship" />
+        </EntityType>
+        <Association Name="FK__tblPost__UserID__5F7E2DAC">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblPost" Type="Self.tblPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPostLi__PostI__625A9A57">
+          <End Role="tblPost" Type="Self.tblPost" Multiplicity="1" />
+          <End Role="tblPostLikes" Type="Self.tblPostLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPost">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="tblPostLikes">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPostLi__UserI__634EBE90">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblPostLikes" Type="Self.tblPostLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblPostLikes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRelati__User1__5BAD9CC8">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRelationship">
+              <PropertyRef Name="User1ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRelati__User2__5CA1C101">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblRelationship">
+              <PropertyRef Name="User2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BetweenUsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblPosts" EntityType="Self.tblPost" />
+          <EntitySet Name="tblPostLikes" EntityType="Self.tblPostLike" />
+          <EntitySet Name="tblRelationships" EntityType="Self.tblRelationship" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK__tblPost__UserID__5F7E2DAC" Association="Self.FK__tblPost__UserID__5F7E2DAC">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblPost" EntitySet="tblPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPostLi__PostI__625A9A57" Association="Self.FK__tblPostLi__PostI__625A9A57">
+            <End Role="tblPost" EntitySet="tblPosts" />
+            <End Role="tblPostLikes" EntitySet="tblPostLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPostLi__UserI__634EBE90" Association="Self.FK__tblPostLi__UserI__634EBE90">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblPostLikes" EntitySet="tblPostLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRelati__User1__5BAD9CC8" Association="Self.FK__tblRelati__User1__5BAD9CC8">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRelationship" EntitySet="tblRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRelati__User2__5CA1C101" Association="Self.FK__tblRelati__User2__5CA1C101">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRelationship" EntitySet="tblRelationships" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BetweenUsDBModelStoreContainer" CdmEntityContainer="BetweenUsDBEntities">
+          <EntitySetMapping Name="tblPosts">
+            <EntityTypeMapping TypeName="BetweenUsDBModel.tblPost">
+              <MappingFragment StoreEntitySet="tblPost">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="DateOfPost" ColumnName="DateOfPost" />
+                <ScalarProperty Name="PostText" ColumnName="PostText" />
+                <ScalarProperty Name="NumberOfLikes" ColumnName="NumberOfLikes" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPostLikes">
+            <EntityTypeMapping TypeName="BetweenUsDBModel.tblPostLike">
+              <MappingFragment StoreEntitySet="tblPostLikes">
+                <ScalarProperty Name="PostLikeID" ColumnName="PostLikeID" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRelationships">
+            <EntityTypeMapping TypeName="BetweenUsDBModel.tblRelationship">
+              <MappingFragment StoreEntitySet="tblRelationship">
+                <ScalarProperty Name="RelationshipID" ColumnName="RelationshipID" />
+                <ScalarProperty Name="RelationshipStatus" ColumnName="RelationshipStatus" />
+                <ScalarProperty Name="User1ID" ColumnName="User1ID" />
+                <ScalarProperty Name="User2ID" ColumnName="User2ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="BetweenUsDBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserLocation" ColumnName="UserLocation" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

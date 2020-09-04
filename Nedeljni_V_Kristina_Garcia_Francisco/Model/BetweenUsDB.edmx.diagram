@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4699047e6a9740a88d53990e220be5fd" Name="Diagram1">
+        <EntityTypeShape EntityType="BetweenUsDBModel.tblPost" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BetweenUsDBModel.tblPostLike" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BetweenUsDBModel.tblRelationship" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BetweenUsDBModel.tblUser" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblPost__UserID__5F7E2DAC" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblPostLi__PostI__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblPostLi__UserI__634EBE90" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblRelati__User1__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblRelati__User2__5CA1C101" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
