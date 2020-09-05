@@ -4,8 +4,8 @@ IF OBJECT_ID('tblRelationship', 'U') IS NOT NULL DROP TABLE tblRelationship;
 IF OBJECT_ID('tblUser', 'U') IS NOT NULL DROP TABLE tblUser;
 
 -- Checks if the database already exists.
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'FacebookAppDB')
-CREATE DATABASE FacebookAppDB;
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'BetweenUsDB')
+CREATE DATABASE BetweenUsDB;
 GO
 
 USE FacebookAppDB
@@ -13,8 +13,8 @@ CREATE TABLE tblUser(
 	UserID			INT IDENTITY(1,1) PRIMARY KEY 	NOT NULL,
 	FirstName		VARCHAR (40)					NOT NULL,
 	LastName		VARCHAR (40)					NOT NULL,
-	Gender			VARCHAR							NOT NULL,
-	DateOfBirth		VARCHAR							NOT NULL,
+	Gender			VARCHAR	(10)					NOT NULL,
+	DateOfBirth		DATE							NOT NULL,
 	Email			VARCHAR (50)					NOT NULL,
 	UserLocation	VARCHAR (50),                    
 	Username		VARCHAR (40) UNIQUE				NOT NULL,

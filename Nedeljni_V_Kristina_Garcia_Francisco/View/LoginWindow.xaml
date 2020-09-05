@@ -325,11 +325,11 @@
                     <StackPanel Grid.Row="5" Orientation="Horizontal" Height="40" HorizontalAlignment="Center" Margin="10,15,0,0">
                         <Label Margin="0,8,20,0">Gender:</Label>
                         <RadioButton  GroupName="gender" Width="80" Name="cbM" Content="Male" IsChecked="{Binding User.Gender, 
-                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=M, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=Male, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
                         <RadioButton  GroupName="gender" Width="80" Name="cbF" Content="Female" IsChecked="{Binding User.Gender, 
-                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=F, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=Female, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
                         <RadioButton  GroupName="gender" Width="80" Name="cbX" Content="Other" IsChecked="{Binding User.Gender, 
-                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=X, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=Other, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
                     </StackPanel>
                     <TextBox x:Name="txtAddress" Grid.Row="6"
                                  materialDesign:HintAssist.Hint="Address"
