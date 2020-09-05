@@ -8,7 +8,7 @@ IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'BetweenUsDB')
 CREATE DATABASE BetweenUsDB;
 GO
 
-USE FacebookAppDB
+USE BetweenUsDB
 CREATE TABLE tblUser(
 	UserID			INT IDENTITY(1,1) PRIMARY KEY 	NOT NULL,
 	FirstName		VARCHAR (40)					NOT NULL,
