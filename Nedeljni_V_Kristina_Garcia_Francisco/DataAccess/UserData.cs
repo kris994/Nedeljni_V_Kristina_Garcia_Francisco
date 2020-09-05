@@ -8,7 +8,7 @@ using System.Linq;
 namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
 {
     /// <summary>
-    /// class used to create the CRUD structure of the application
+    /// class used to create the user CRUD structure of the application
     /// </summary>
     class UserData
     {

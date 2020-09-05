@@ -1,0 +1,124 @@
+﻿<Window x:Class="Nedeljni_V_Kristina_Garcia_Francisco.View.AddPostWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nedeljni_V_Kristina_Garcia_Francisco.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Create Post"
+        Height="620"
+        Width="400"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowState="Maximized"
+        ShowInTaskbar="True"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Border BorderBrush="#505050"
+                x:Name="border"
+                Height="620"
+                Width="400"
+                BorderThickness="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0"
+                      Grid.Column="0"
+                      Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="350"></RowDefinition>
+                        <RowDefinition Height="50*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               Grid.Row="0"
+                               Background="#505050">
+            <Label x:Name="lblTitle"
+                        Foreground="{StaticResource PrimaryHueMidBrush}"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Stretch"
+                        BorderBrush="#89000000"
+                        FontSize="36"
+                        FontWeight="Bold"
+                        Width="395"
+                        Content="Create Post">            
+            </Label></TextBlock>
+                    <TextBlock Grid.Row="1"
+                               x:Name="error"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="15"
+                               FontWeight="Bold"
+                               Foreground="Red"></TextBlock>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBox x:Name="txtDescription"
+                                 materialDesign:HintAssist.Hint="Post Text"
+                                 Width="300"
+                                 Height="315"
+                                 Text="{Binding Post.PostText, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="100"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Auto"
+                                 Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                 Padding="0,-2,0,0"
+                                 Margin="0,5,0,5"
+                                 VerticalAlignment="Top" />
+                        <TextBlock Grid.Column="0"
+                                   Margin="50 0 0 5"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Bottom"
+                                   FontSize="14"
+                                   FontStyle="Italic"
+                                   Foreground="Red">* - Maximum 100 characters</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <Button Grid.Column="0"
+                                    x:Name="btnExit"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    materialDesign:ButtonAssist.CornerRadius="20"
+                                    ToolTip="Exit dialogue"
+                                    Margin="5,0,5,0"
+                                    Width="130"
+                                    Foreground="White"
+                                    Height="35"
+                                    Command="{Binding Cancel, UpdateSourceTrigger=PropertyChanged}"
+                                    Background="#FFF34A4A"
+                                    BorderBrush="{x:Null}">Cancel</Button>
+                            <Button Grid.Column="1"
+                                    x:Name="btnCreatePost"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    materialDesign:ButtonAssist.CornerRadius="20"
+                                    ToolTip="Create a new post"
+                                    Margin="5,0,5,0"
+                                    Width="130"
+                                    Height="35"
+                                    Foreground="White"
+                                    Command="{Binding CreatePost, UpdateSourceTrigger=PropertyChanged}"
+                                    Background="#FF8BC34A"
+                                    BorderBrush="{x:Null}">Create Post</Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

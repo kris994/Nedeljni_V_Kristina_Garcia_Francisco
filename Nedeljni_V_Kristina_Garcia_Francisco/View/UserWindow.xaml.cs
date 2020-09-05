@@ -25,6 +25,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
             this.DataContext = new UserWindowViewModel(this);
             this.Language = XmlLanguage.GetLanguage("en-GB");
             UserData userData = new UserData();
+            this.Name = "UserWindow";
 
             lblName.Content = LoggedInUser.CurrentUser.FirstName + " " + LoggedInUser.CurrentUser.LastName;
             List<tblRelationship> allRelationshipPending = userData.GetAllPandingUsers(LoggedInUser.CurrentUser).ToList();
@@ -75,6 +76,12 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
                     AllPendingUsersWindow allPendingUsersWindow = new AllPendingUsersWindow();
                     StackPanelMain.Children.Clear();
                     StackPanelMain.Children.Add(allPendingUsersWindow);
+                }
+                else if (screen.Name == "UserWindow")
+                {
+                    UserWindow userWindow = new UserWindow();
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(userWindow);
                 }
                 else
                 {

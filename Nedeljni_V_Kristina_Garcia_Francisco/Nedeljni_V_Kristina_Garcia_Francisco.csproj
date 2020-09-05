@@ -90,6 +90,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="DataAccess\PostData.cs" />
     <Compile Include="Helper\DateConverter.cs" />
     <Compile Include="Helper\GenderConverter.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
@@ -128,12 +129,16 @@
       <DependentUpon>BetweenUsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModel\AddPostViewModel.cs" />
     <Compile Include="ViewModel\AllUsersViewModel.cs" />
     <Compile Include="ViewModel\ItemMenu.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\Subitem.cs" />
     <Compile Include="ViewModel\UserWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AddPostWindow.xaml.cs">
+      <DependentUpon>AddPostWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AllFriendWindow.xaml.cs">
       <DependentUpon>AllFriendWindow.xaml</DependentUpon>
     </Compile>
@@ -157,6 +162,10 @@
     <Compile Include="View\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddPostWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AllFriendWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
