@@ -184,6 +184,18 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
             UserList = userData.GetAllUsers().ToList();
 
             // Login
+            LoggedInUser.CurrentUser = new tblUser
+            {
+                UserID = User.UserID,
+                FirstName = User.FirstName,
+                LastName = User.LastName,
+                Email = User.Email,
+                DateOfBirth = User.DateOfBirth,
+                UserLocation = User.UserLocation,
+                Username = User.Username,
+                UserPassword = User.UserPassword
+            };
+
             ViewRegistration = Visibility.Collapsed;
             UserWindow userWindoe = new UserWindow();
             view.Close();
