@@ -198,9 +198,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
             };
 
             ViewRegistration = Visibility.Collapsed;
-            UserWindow userWindoe = new UserWindow();
+            UserWindow userWindow = new UserWindow();
             view.Close();
-            userWindoe.Show();
+            userWindow.Show();
         }
 
         /// <summary>

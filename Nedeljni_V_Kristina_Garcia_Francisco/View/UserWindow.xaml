@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Nedeljni_V_Kristina_Garcia_Francisco.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:c="clr-namespace:Nedeljni_V_Kristina_Garcia_Francisco.Helper"
         mc:Ignorable="d"
         Title="Between Us"
         MinHeight="200"
@@ -15,6 +16,9 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         MouseLeftButtonDown="DragMe">
+    <Window.Resources>
+        <c:UsernameIDConverter x:Key="UsernameIDConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
@@ -90,7 +94,7 @@
                         <ColumnDefinition Width="45" />
                         <ColumnDefinition Width="45" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" RenderTransformOrigin="0.509,0.462">
+                    <Grid Grid.Column="0">
                         <Button x:Name="btnAddPost"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         materialDesign:ButtonAssist.CornerRadius="20"
@@ -105,6 +109,21 @@
                         HorizontalAlignment="Left"
                         Content="Create New Post"
                         BorderBrush="{x:Null}"></Button>
+                        <Button x:Name="btnMainPage"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        ToolTip="Return to Main Page"
+                        Margin="-472,0,0,15"
+                        Width="185"
+                        Foreground="White"
+                        Command="{Binding MainPage, UpdateSourceTrigger=PropertyChanged}"
+                        Height="35"
+                        Background="#FF8BC34A"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                        Content="Return to Main Page"
+                        Visibility="Hidden"
+                        BorderBrush="{x:Null}" Click="BtnMainPage_Click"></Button>
                         <materialDesign:Snackbar 
                     Height="40" 
                     VerticalAlignment="Top" 
@@ -283,6 +302,52 @@
                     Foreground="{StaticResource PrimaryHueMidBrush}"
 
             >Between Us</TextBlock>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <ListView Name="DataGridPost" Grid.Row="1" Grid.Column="1" Margin="30 20 0 0" ItemsSource="{Binding PostList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Post, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="3" BorderBrush="#505050">
+                        <StackPanel>
+                            <Grid Height="170" Width="800">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="100"></RowDefinition>
+                                    <RowDefinition Height="20"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Margin="30 0 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="20"
+                                           Text="{Binding UserID, Converter={StaticResource ResourceKey=UsernameIDConverter}}"
+                                           VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Grid.Row="1"
+                                           Margin="20"
+                                           FontSize="16"
+                                           Text="{Binding PostText}"
+                                           FontWeight="Light"
+                                           TextWrapping="Wrap"></TextBlock>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <TextBlock 
+                                           Margin="20 0 0 0"
+                                           FontSize="12"
+                                           Text="{Binding NumberOfLikes, StringFormat='Total Likes: {0}'}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"></TextBlock>
+                                    <TextBlock
+                                           Margin="20 0 0 0"
+                                           FontSize="12"
+                                           Text="{Binding DateOfPost, StringFormat=\{0:dd.MM.yyyy\}}"
+                                           VerticalAlignment="Center"                               
+                                           HorizontalAlignment="Right"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
         <Grid Grid.Column="1"
               Grid.Row="2"
               Background="White"

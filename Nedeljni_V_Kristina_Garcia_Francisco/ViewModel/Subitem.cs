@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
 {
@@ -16,5 +17,6 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         }
         public string Name { get; private set; }
         public UserControl Screen { get; private set; }
+        public Window WindowScreen { get; private set; }
     }
 }

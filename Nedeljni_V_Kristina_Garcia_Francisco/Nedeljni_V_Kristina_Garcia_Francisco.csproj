@@ -95,6 +95,7 @@
     <Compile Include="Helper\GenderConverter.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RadioButtonConverter.cs" />
+    <Compile Include="Helper\UsernameIDConverter.cs" />
     <Compile Include="Helper\UserNameConverter.cs" />
     <Compile Include="Helper\FriendNameConverter.cs" />
     <Compile Include="Helper\UserWaitingAcceptNameConverter.cs" />

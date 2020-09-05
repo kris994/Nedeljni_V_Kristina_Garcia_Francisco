@@ -64,29 +64,35 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
                     AllUsersWindow allUserWindow = new AllUsersWindow();
                     StackPanelMain.Children.Clear();
                     StackPanelMain.Children.Add(allUserWindow);
+                    DataGridPost.Visibility = Visibility.Collapsed;
+                    btnAddPost.Visibility = Visibility.Collapsed;
+                    btnMainPage.Visibility = Visibility.Visible;
                 }
                 else if (screen.Name == "AllFriendWindow")
                 {
                     AllFriendWindow allFirendWindow = new AllFriendWindow();
                     StackPanelMain.Children.Clear();
                     StackPanelMain.Children.Add(allFirendWindow);
+                    DataGridPost.Visibility = Visibility.Collapsed;
+                    btnAddPost.Visibility = Visibility.Collapsed;
+                    btnMainPage.Visibility = Visibility.Visible;
                 }
                 else if (screen.Name == "AllPendingUsersWindow")
                 {
                     AllPendingUsersWindow allPendingUsersWindow = new AllPendingUsersWindow();
                     StackPanelMain.Children.Clear();
                     StackPanelMain.Children.Add(allPendingUsersWindow);
-                }
-                else if (screen.Name == "UserWindow")
-                {
-                    UserWindow userWindow = new UserWindow();
-                    StackPanelMain.Children.Clear();
-                    StackPanelMain.Children.Add(userWindow);
+                    DataGridPost.Visibility = Visibility.Collapsed;
+                    btnAddPost.Visibility = Visibility.Collapsed;
+                    btnMainPage.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     StackPanelMain.Children.Clear();
                     StackPanelMain.Children.Add(screen);
+                    DataGridPost.Visibility = Visibility.Visible;
+                    btnAddPost.Visibility = Visibility.Visible;
+                    btnMainPage.Visibility = Visibility.Hidden;
                 }
             }
         }
@@ -194,6 +200,14 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
             {
                 this.WindowState = WindowState.Minimized;
             }
+        }
+
+        private void BtnMainPage_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanelMain.Children.Clear();
+            DataGridPost.Visibility = Visibility.Visible;
+            btnAddPost.Visibility = Visibility.Visible;
+            btnMainPage.Visibility = Visibility.Hidden;
         }
     }
 }
