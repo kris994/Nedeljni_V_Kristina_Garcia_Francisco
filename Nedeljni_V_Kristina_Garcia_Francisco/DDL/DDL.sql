@@ -11,19 +11,19 @@ GO
 USE FacebookAppDB
 CREATE TABLE tblUser(
 	UserID			INT IDENTITY(1,1) PRIMARY KEY 	NOT NULL,
-	FirstName		CHAR (40)						NOT NULL,
-	LastName		CHAR (40)						NOT NULL,
-	Gender			CHAR							NOT NULL,
-	DateOfBirth		DATE							NOT NULL,
-	Email			CHAR (50)						NOT NULL,
-	UserLocation	CHAR (50),                    
-	Username		CHAR (40) UNIQUE				NOT NULL,
+	FirstName		VARCHAR (40)					NOT NULL,
+	LastName		VARCHAR (40)					NOT NULL,
+	Gender			VARCHAR							NOT NULL,
+	DateOfBirth		VARCHAR							NOT NULL,
+	Email			VARCHAR (50)					NOT NULL,
+	UserLocation	VARCHAR (50),                    
+	Username		VARCHAR (40) UNIQUE				NOT NULL,
 	UserPassword	CHAR (1000)						NOT NULL,
 );
 
 CREATE TABLE tblRelationship(
 	RelationshipID		INT IDENTITY(1,1) PRIMARY KEY 	NOT NULL,
-	RelationshipStatus	CHAR (10)						NOT NULL,
+	RelationshipStatus	VARCHAR (10)					NOT NULL,
 	User1ID INT FOREIGN KEY REFERENCES tblUser(UserID)	NOT NULL,
 	User2ID INT FOREIGN KEY REFERENCES tblUser(UserID)	NOT NULL,
 );
@@ -31,7 +31,7 @@ CREATE TABLE tblRelationship(
  CREATE TABLE tblPost (
     PostID			INT IDENTITY(1,1) PRIMARY KEY		NOT NULL,
 	DateOfPost		DATE								NOT NULL,
-	PostText		CHAR(1000)							NOT NULL,
+	PostText		VARCHAR(100)						NOT NULL,
 	NumberOfLikes	INT									NOT NULL,
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID)	NOT NULL,
 );

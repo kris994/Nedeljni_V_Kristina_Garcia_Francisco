@@ -96,8 +96,31 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                 Debug.WriteLine("Exception" + ex.Message.ToString());
                 return null;
             }
-
         }
+
+        /// <summary>
+        /// Get all friends
+        /// </summary>
+        /// <param name="user">Current User</param>
+        /// <returns>The list of all friends</returns>
+        public List<tblRelationship> GetAllFriends(tblUser user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    List<tblRelationship> list = new List<tblRelationship>();
+                    list = context.tblRelationships.Where(x => (x.User1ID == user.UserID || x.User2ID == user.UserID) && x.RelationshipStatus == "Accepted").ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
         /// <summary>
         /// Get all waiting to accept users
         /// </summary>
@@ -171,6 +194,36 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
             {
                 Debug.WriteLine("Exception " + ex.Message.ToString());
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Search if user with that ID exists in the user table
+        /// </summary>
+        /// <param name="userID">Takes the user id that we want to search for</param>
+        /// <returns>The user</returns>
+        public tblUser GetUser(int userID)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    tblUser result = (from x in context.tblUsers where x.UserID == userID select x).FirstOrDefault();
+
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
             }
         }
 
@@ -265,6 +318,53 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Accept Friend Request
+        /// </summary>
+        /// <param name="user">The user we accepting for friend request/param>
+        /// <returns>edited relationship</returns>
+        public tblRelationship AcceptFriendRequest(tblRelationship user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    tblRelationship requestToEdit = (from ss in context.tblRelationships where ss.RelationshipID == user.RelationshipID select ss).First();
+                    requestToEdit.RelationshipStatus = "Accepted";
+                    user.RelationshipStatus = "Accepted";
+                    context.SaveChanges();
+  
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Deny Friend Request
+        /// </summary>
+        /// <param name="user">The friend request we are deleting/param>
+        public void DenyFriendRequest(tblRelationship user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    tblRelationship requestToDelete = (from ss in context.tblRelationships where ss.RelationshipID == user.RelationshipID select ss).First();
+                    context.tblRelationships.Remove(requestToDelete);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
     }

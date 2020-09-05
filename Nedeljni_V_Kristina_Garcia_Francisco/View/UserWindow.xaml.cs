@@ -18,6 +18,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class UserWindow : Window
     {
+        
         public UserWindow()
         {
             InitializeComponent();
@@ -27,42 +28,16 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
 
             lblName.Content = LoggedInUser.CurrentUser.FirstName + " " + LoggedInUser.CurrentUser.LastName;
             List<tblRelationship> allRelationshipPending = userData.GetAllPandingUsers(LoggedInUser.CurrentUser).ToList();
-            int allPandingUsersCount = allRelationshipPending.Count();
 
             var menuUsers = new List<Subitem>
                     {
-                        new Subitem("All Users", new AllUsersWindow()),
-                        new Subitem($"Panding Users ({allPandingUsersCount})", new AllPendingUsersWindow()),
+                        new Subitem("Find Friends", new AllUsersWindow()),
+                        new Subitem($"Panding Friends", new AllPendingUsersWindow()),
+                        new Subitem("All Friends", new AllFriendWindow()),
                     };
-            var item1 = new ItemMenu("Users", menuUsers, PackIconKind.Account);
-
-            //var menuShopping = new List<Subitem>
-            //        {
-            //            new Subitem("Sve Shopping Liste", new AllShoppingList()),
-            //        };
-            //var item2 = new ItemMenu("Shopping Lista", menuShopping, PackIconKind.Pizzeria);
-
-
-            //var menuIngredient = new List<Subitem>
-            //        {
-            //            new Subitem("Lista sastojaka", new AddIngredientMenu()),
-            //        };
-            //var item22 = new ItemMenu("Sastojci", menuIngredient, PackIconKind.Cookie);
-
-            //var menuStorage = new List<Subitem>
-            //        {
-            //            new Subitem("Skladiste Sastojaka", new AllStorageList()),
-            //        };
-            //var item33 = new ItemMenu("Skladiste", menuStorage, PackIconKind.Cookie);
-
-            //var item50 = new ItemMenu("Menu", new UserControl(), PackIconKind.Pizza);
+            var item1 = new ItemMenu("Friends", menuUsers, PackIconKind.Account);
 
             Menu.Children.Add(new UserControlMenuItem(item1, this));
-            //Menu.Children.Add(new UserControlMenuItem(item1, this));
-            //Menu.Children.Add(new UserControlMenuItem(item2, this));
-            //Menu.Children.Add(new UserControlMenuItem(item22, this));
-            //Menu.Children.Add(new UserControlMenuItem(item33, this));
-
 
             //determines the current page length
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
@@ -77,29 +52,35 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
         /// <param name="sender">Selected UserControl</param>
         public void SwitchScreen(object sender)
         {
-
-
             var screen = ((UserControl)sender);
             if (screen != null)
             {
                 StackPanelMain.Children.Clear();
                 StackPanelMain.Children.Add(screen);
 
-                //ArchivedOrder ao = StackPanelMain.FindName("ArchivedOrder") as ArchivedOrder;
-                //ArchivedOrder ar = new ArchivedOrder();
-
-                //if (screen.Name == "AllStorageList")
-                //{
-                //    AllStorageList storageList = new AllStorageList();
-                //    StackPanelMain.Children.Clear();
-                //    StackPanelMain.Children.Add(storageList);
-                //}
-                //else
-                //{
-                //    StackPanelMain.Children.Clear();
-                //    StackPanelMain.Children.Add(screen);
-                //}
-
+                if (screen.Name == "AllUsersWindow")
+                {
+                    AllUsersWindow allUserWindow = new AllUsersWindow();
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(allUserWindow);
+                }
+                else if (screen.Name == "AllFriendWindow")
+                {
+                    AllFriendWindow allFirendWindow = new AllFriendWindow();
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(allFirendWindow);
+                }
+                else if (screen.Name == "AllPendingUsersWindow")
+                {
+                    AllPendingUsersWindow allPendingUsersWindow = new AllPendingUsersWindow();
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(allPendingUsersWindow);
+                }
+                else
+                {
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(screen);
+                }
             }
         }
 

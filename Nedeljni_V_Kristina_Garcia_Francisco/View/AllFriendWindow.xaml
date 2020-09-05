@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Nedeljni_V_Kristina_Garcia_Francisco.View.AllUsersWindow"
+﻿<UserControl x:Class="Nedeljni_V_Kristina_Garcia_Francisco.View.AllFriendWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,7 +10,7 @@
         d:DesignHeight="500"
         d:DesignWidth="970">
     <UserControl.Resources>
-        <c:UserNameConverter x:Key="UserNameConverter" />
+        <c:FriendNameConverter x:Key="FriendNameConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid MinWidth="950"
@@ -27,7 +27,7 @@
                         Foreground="{StaticResource PrimaryHueMidBrush}"
                         FontWeight="Bold"
                         FontSize="30"
-                        Height="64">Find Friends</Label>
+                        Height="64">Friends</Label>
                 <Border Grid.Row="0"
                         BorderThickness="0"
                         Margin="30,65,30,0"
@@ -38,31 +38,11 @@
                         VerticalAlignment="Stretch"></Border>
                 <!--Dugmici-->
             </Grid>
-            <materialDesign:Snackbar 
-                    Height="40" 
-                    VerticalAlignment="Top" 
-                    HorizontalAlignment="Center"
-                    Margin="0,0,0,0"
-                    IsActive="False"
-                    x:Name="InfoMessage"
-                    FontSize="16"
-                    Background="{Binding InfoLabelBG}"
-                    FontFamily="{DynamicResource MaterialDesignFont}"
-                    >
-                <materialDesign:SnackbarMessage Content="{Binding InfoLabel}"
-                                                    HorizontalContentAlignment="Center"
-                                                    Margin="0,0,0,0"
-                                                    Height="40"
-                                                    Width="400"
-                                                    FontWeight="Bold"
-                                                    Foreground="Black"
-                                                    ActionCommand="{Binding SnackUserInfo}" />
-            </materialDesign:Snackbar>
             <Grid Grid.Row="1">
-                <DataGrid Name="DataGridUser"
+                <DataGrid Name="DataGridStorage"
                       Grid.Row="1"
-                      ItemsSource="{Binding UserList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding User, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding FriendList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding PendingUser, UpdateSourceTrigger=PropertyChanged}"
                       IsReadOnly="True"
                       FontSize="14"
                       Height="auto"
@@ -83,7 +63,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name"
                                         Width="150"
-                                        Binding="{Binding UserID, Converter={StaticResource ResourceKey=UserNameConverter}}">
+                                        Binding="{Binding RelationshipID, Converter={StaticResource ResourceKey=FriendNameConverter}}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
                                     <Setter Property="TextBlock.TextWrapping"
@@ -91,25 +71,6 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Address"
-                                        Width="150"
-                                        Binding="{Binding UserLocation}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.TextWrapping"
-                                        Value="Wrap" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Name="btnFriendRequest" Content="Friend Request" 
-                                Command="{Binding DataContext.FriendRequest, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                                        Margin="4" FontWeight="Bold"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

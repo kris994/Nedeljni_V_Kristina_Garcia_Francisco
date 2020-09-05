@@ -4,15 +4,15 @@ using System.Windows.Controls;
 namespace Nedeljni_V_Kristina_Garcia_Francisco.View
 {
     /// <summary>
-    /// Interaction logic for AllUsersWindow.xaml
+    /// Interaction logic for AllFriendWindow.xaml
     /// </summary>
-    public partial class AllUsersWindow : UserControl
+    public partial class AllFriendWindow : UserControl
     {
-        public AllUsersWindow()
+        public AllFriendWindow()
         {
             InitializeComponent();
             this.DataContext = new AllUsersViewModel(this);
-            this.Name = "AllUsersWindow";
+            this.Name = "AllFriendWindow";
         }
     }
 }

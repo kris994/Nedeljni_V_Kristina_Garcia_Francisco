@@ -95,6 +95,7 @@
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RadioButtonConverter.cs" />
     <Compile Include="Helper\UserNameConverter.cs" />
+    <Compile Include="Helper\FriendNameConverter.cs" />
     <Compile Include="Helper\UserWaitingAcceptNameConverter.cs" />
     <Compile Include="Helper\UserPandingNameConverter.cs" />
     <Compile Include="Helper\Validations.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="ViewModel\Subitem.cs" />
     <Compile Include="ViewModel\UserWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AllFriendWindow.xaml.cs">
+      <DependentUpon>AllFriendWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AllPendingUsersWindow.xaml.cs">
       <DependentUpon>AllPendingUsersWindow.xaml</DependentUpon>
     </Compile>
@@ -153,6 +157,10 @@
     <Compile Include="View\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AllFriendWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AllPendingUsersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

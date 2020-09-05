@@ -12,6 +12,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
         {
             InitializeComponent();
             this.DataContext = new AllUsersViewModel(this);
+            this.Name = "AllPendingUsersWindow";
         }
     }
 }
