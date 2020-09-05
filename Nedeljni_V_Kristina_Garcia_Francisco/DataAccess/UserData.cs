@@ -23,7 +23,117 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                 using (BetweenUsDBEntities context = new BetweenUsDBEntities())
                 {
                     List<tblUser> list = new List<tblUser>();
+                    list = (from x in context.tblUsers select x).ToList();                 
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get all data about users but the current one from the database
+        /// </summary>
+        /// <returns>The list of all users</returns>
+        public List<tblUser> GetAllUsersButPanding()
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    List<tblUser> list = new List<tblUser>();
+                    List<tblRelationship> allRelationShips = GetAllRelationshipsUsers(LoggedInUser.CurrentUser).ToList();
+
                     list = (from x in context.tblUsers select x).ToList();
+
+                    // find the current user before removing them from the list
+                    tblUser userToRemove = (from r in context.tblUsers where r.UserID == LoggedInUser.CurrentUser.UserID select r).First();
+                    list.Remove(userToRemove);
+
+                    // remove users that already have a relationship with the logged in user
+                    for (int i = 0; i < allRelationShips.Count; i++)
+                    {
+                        for (int j = 0; j < list.Count; j++)
+                        {
+                            if (allRelationShips[i].User1ID == list[j].UserID ||
+                               allRelationShips[i].User2ID == list[j].UserID)
+                            {
+                                list.Remove(list[j]);
+                            }
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get all relationships users
+        /// </summary>
+        /// <param name="user">Current User</param>
+        /// <returns>The list of all relationship users</returns>
+        public List<tblRelationship> GetAllRelationshipsUsers(tblUser user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    List<tblRelationship> list = new List<tblRelationship>();
+                    list = context.tblRelationships.Where(x => x.User1ID == user.UserID || x.User2ID == user.UserID).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+
+        }
+        /// <summary>
+        /// Get all waiting to accept users
+        /// </summary>
+        /// <param name="user">Current User</param>
+        /// <returns>The list of all users</returns>
+        public List<tblRelationship> GetAllWaitingToAcceptUsers(tblUser user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    List<tblRelationship> list = new List<tblRelationship>();
+                    list = context.tblRelationships.Where(x => x.User1ID == user.UserID && x.RelationshipStatus == "Pending").ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get panding users
+        /// </summary>
+        /// <param name="user">Current User</param>
+        /// <returns>The list of all users</returns>
+        public List<tblRelationship> GetAllPandingUsers(tblUser user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    List<tblRelationship> list = new List<tblRelationship>();
+                    list = context.tblRelationships.Where(x => x.User2ID == user.UserID && x.RelationshipStatus == "Pending").ToList();
                     return list;
                 }
             }
@@ -118,6 +228,37 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
 
                         return user;
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Create Friend Request
+        /// </summary>
+        /// <param name="user">The user ID we adding for friend request/param>
+        /// <returns>new relationship</returns>
+        public tblRelationship CreateFriendRequest(tblUser user)
+        {
+            try
+            {
+                using (BetweenUsDBEntities context = new BetweenUsDBEntities())
+                {
+                    tblRelationship newRelationShip = new tblRelationship
+                    {
+                        RelationshipStatus = "Pending",
+                        User1ID = LoggedInUser.CurrentUser.UserID,
+                        User2ID = user.UserID,
+                    };
+
+                    context.tblRelationships.Add(newRelationShip);
+                    context.SaveChanges();
+
+                    return newRelationShip;
                 }
             }
             catch (Exception ex)

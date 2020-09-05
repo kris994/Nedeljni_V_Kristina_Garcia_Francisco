@@ -52,8 +52,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -92,6 +94,9 @@
     <Compile Include="Helper\GenderConverter.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RadioButtonConverter.cs" />
+    <Compile Include="Helper\UserNameConverter.cs" />
+    <Compile Include="Helper\UserWaitingAcceptNameConverter.cs" />
+    <Compile Include="Helper\UserPandingNameConverter.cs" />
     <Compile Include="Helper\Validations.cs" />
     <Compile Include="Model\BetweenUsDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -122,11 +127,18 @@
       <DependentUpon>BetweenUsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModel\AllUsersViewModel.cs" />
     <Compile Include="ViewModel\ItemMenu.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\Subitem.cs" />
     <Compile Include="ViewModel\UserWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AllPendingUsersWindow.xaml.cs">
+      <DependentUpon>AllPendingUsersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AllUsersWindow.xaml.cs">
+      <DependentUpon>AllUsersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +153,14 @@
     <Compile Include="View\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AllPendingUsersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AllUsersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

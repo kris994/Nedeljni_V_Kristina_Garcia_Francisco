@@ -1,20 +1,14 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Nedeljni_V_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_V_Kristina_Garcia_Francisco.Model;
 using Nedeljni_V_Kristina_Garcia_Francisco.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.View
@@ -29,15 +23,18 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
             InitializeComponent();
             this.DataContext = new UserWindowViewModel(this);
             this.Language = XmlLanguage.GetLanguage("en-GB");
+            UserData userData = new UserData();
 
             lblName.Content = LoggedInUser.CurrentUser.FirstName + " " + LoggedInUser.CurrentUser.LastName;
+            List<tblRelationship> allRelationshipPending = userData.GetAllPandingUsers(LoggedInUser.CurrentUser).ToList();
+            int allPandingUsersCount = allRelationshipPending.Count();
 
-            //var menuOrders = new List<Subitem>
-            //        {
-            //            //new Subitem("Napisi novi recept", new AddRecipe()),
-            //            new Subitem("Svi Recepti", new AllRecipesWindow()),
-            //        };
-            //var item1 = new ItemMenu("Recepti", menuOrders, PackIconKind.);
+            var menuUsers = new List<Subitem>
+                    {
+                        new Subitem("All Users", new AllUsersWindow()),
+                        new Subitem($"Panding Users ({allPandingUsersCount})", new AllPendingUsersWindow()),
+                    };
+            var item1 = new ItemMenu("Users", menuUsers, PackIconKind.Account);
 
             //var menuShopping = new List<Subitem>
             //        {
@@ -60,7 +57,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
 
             //var item50 = new ItemMenu("Menu", new UserControl(), PackIconKind.Pizza);
 
-            //Menu.Children.Add(new UserControlMenuItem(item50, this));
+            Menu.Children.Add(new UserControlMenuItem(item1, this));
             //Menu.Children.Add(new UserControlMenuItem(item1, this));
             //Menu.Children.Add(new UserControlMenuItem(item2, this));
             //Menu.Children.Add(new UserControlMenuItem(item22, this));

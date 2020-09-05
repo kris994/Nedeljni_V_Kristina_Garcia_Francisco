@@ -190,6 +190,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
                 FirstName = User.FirstName,
                 LastName = User.LastName,
                 Email = User.Email,
+                Gender = User.Gender,
                 DateOfBirth = User.DateOfBirth,
                 UserLocation = User.UserLocation,
                 Username = User.Username,
@@ -286,6 +287,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
                             Email = UserList[i].Email,
                             DateOfBirth = UserList[i].DateOfBirth,
                             UserLocation = UserList[i].UserLocation,
+                            Gender = User.Gender,
                             Username = UserList[i].Username,
                             UserPassword = UserList[i].UserPassword
                         };
