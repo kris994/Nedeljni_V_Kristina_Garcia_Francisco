@@ -267,6 +267,43 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         {
             try
             {
+                List<tblRelationship> allRelationships = userData.GetAllRelationshipsUsers(LoggedInUser.CurrentUser).ToList();
+                List<tblUser> allUsers = userData.GetAllUsers().ToList();
+                int relationshipUserID = 0;
+                ProfileWindow profileWindow;
+
+                if (PandingUser != null)
+                {
+                    for (int i = 0; i < allRelationships.Count; i++)
+                    {
+                        if (PandingUser.RelationshipID == allRelationships[i].RelationshipID)
+                        {
+                            // Check the name of the person that is the current logged in users friend
+                            if (allRelationships[i].User1ID != LoggedInUser.CurrentUser.UserID)
+                            {
+                                relationshipUserID = allRelationships[i].User1ID;
+                            }
+                            else
+                            {
+                                relationshipUserID = allRelationships[i].User2ID;
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < allUsers.Count; i++)
+                    {
+                        if (allUsers[i].UserID == relationshipUserID)
+                        {
+                            profileWindow = new ProfileWindow(allUsers[i]);
+                            profileWindow.ShowDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    profileWindow = new ProfileWindow(User);
+                    profileWindow.ShowDialog();
+                }
             }
             catch (Exception ex)
             {

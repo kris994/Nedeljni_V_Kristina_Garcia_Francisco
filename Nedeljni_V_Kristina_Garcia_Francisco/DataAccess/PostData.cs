@@ -12,9 +12,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
     class PostData
     {
         /// <summary>
-        /// Get all data about users from the database
+        /// Get all data about posts from the database
         /// </summary>
-        /// <returns>The list of all users</returns>
+        /// <returns>The list of all posts</returns>
         public List<tblPost> GetAllPosts()
         {
             try
@@ -25,6 +25,34 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                     list = (from x in context.tblPosts select x).ToList();
                     return list;
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get all data about users posts from the database
+        /// </summary>
+        /// <returns>The list of all users posts</returns>
+        public List<tblPost> GetAllUserPosts(tblUser user)
+        {
+            try
+            {
+                List<tblPost> list = new List<tblPost>();
+                List<tblPost> allPosts = GetAllPosts().ToList();
+
+                for (int i = 0; i < allPosts.Count; i++)
+                {
+                    if (allPosts[i].UserID == user.UserID)
+                    {
+                        list.Add(allPosts[i]);
+                    }
+                }
+
+                return list;
             }
             catch (Exception ex)
             {

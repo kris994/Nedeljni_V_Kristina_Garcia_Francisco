@@ -55,7 +55,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <ListView Name="DataGridFriends" Grid.Row="1" Margin="0 0 0 0" ItemsSource="{Binding FriendList, UpdateSourceTrigger=PropertyChanged}" 
-                              SelectedItem="{Binding PendingUser, UpdateSourceTrigger=PropertyChanged}"  ItemContainerStyle="{StaticResource CustomListViewItemStyle}" AlternationCount="2">
+                              SelectedItem="{Binding PandingUser, UpdateSourceTrigger=PropertyChanged}"  ItemContainerStyle="{StaticResource CustomListViewItemStyle}" AlternationCount="2">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
