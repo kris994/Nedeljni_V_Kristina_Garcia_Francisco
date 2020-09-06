@@ -250,6 +250,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\Picture\account.jpg" />
     <Content Include="DDL\DDL.sql" />
     <Content Include="Model\BetweenUsDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

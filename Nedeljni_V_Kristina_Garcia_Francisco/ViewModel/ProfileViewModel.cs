@@ -1,9 +1,12 @@
 ﻿using Nedeljni_V_Kristina_Garcia_Francisco.Commands;
 using Nedeljni_V_Kristina_Garcia_Francisco.DataAccess;
+using Nedeljni_V_Kristina_Garcia_Francisco.Helper;
 using Nedeljni_V_Kristina_Garcia_Francisco.Model;
 using Nedeljni_V_Kristina_Garcia_Francisco.View;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
@@ -13,6 +16,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         readonly ProfileWindow profileWindow;
         readonly UserProfileWindow userProfileWindow;
         PostData postData = new PostData();
+        UserData userData = new UserData();
 
         #region Constuctor
         /// <summary>
@@ -35,8 +39,10 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         /// <param name="userProfile">user</param>
         public ProfileViewModel(UserProfileWindow userProfileWindowOpen, tblUser userProfile)
         {
-            LoggedInUser.CurrentUser = userProfile;
+            user = LoggedInUser.CurrentUser;
+            user = userProfile;
             userProfileWindow = userProfileWindowOpen;
+            ViewChangePassword = Visibility.Collapsed;
         }
         #endregion
 
@@ -107,6 +113,69 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
                 OnPropertyChanged("ViewPost");
             }
         }
+
+        /// <summary>
+        /// Visibility Password Change
+        /// </summary>
+        private Visibility viewChangePassword;
+        public Visibility ViewChangePassword
+        {
+            get
+            {
+                return viewChangePassword;
+            }
+            set
+            {
+                viewChangePassword = value;
+                OnPropertyChanged("ViewChangePassword");
+            }
+        }
+
+        /// <summary>
+        /// Info label
+        /// </summary>
+        private string infoLabel;
+        public string InfoLabel
+        {
+            get
+            {
+                return infoLabel;
+            }
+            set
+            {
+                infoLabel = value;
+                OnPropertyChanged("InfoLabel");
+            }
+        }
+
+        /// <summary>
+        /// Info label background
+        /// </summary>
+        private string infoLabelBG;
+        public string InfoLabelBG
+        {
+            get
+            {
+                return infoLabelBG;
+            }
+            set
+            {
+                infoLabelBG = value;
+                OnPropertyChanged("InfoLabelBG");
+            }
+        }
+        #endregion
+
+        #region SnackBarInfo
+        /// <summary>
+        /// Snack bar user info showing
+        /// </summary>
+        public async void SnackUserInfo()
+        {
+            userProfileWindow.InfoMessage.IsActive = true;
+            await Task.Delay(3000);
+            userProfileWindow.InfoMessage.IsActive = false;
+        }
         #endregion
 
         #region Commands
@@ -136,6 +205,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
             if (dialog == MessageBoxResult.Yes)
             {
                 ViewPost = Visibility.Collapsed;
+                profileWindow.border.Width = 400;
                 profileWindow.Close();
             }
         }
@@ -181,6 +251,134 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         private bool CanPostPreviewExecute()
         {
             return true;
+        }
+
+        /// <summary>
+        /// ChangePassword button
+        /// </summary>
+        private ICommand changePassword;
+        public ICommand ChangePassword
+        {
+            get
+            {
+                if (changePassword == null)
+                {
+                    changePassword = new RelayCommand(param => ChangePasswordExecute(), param => CanChangePasswordExecute());
+                }
+                return changePassword;
+            }
+        }
+
+        /// <summary>
+        /// ChangePassword preview
+        /// </summary>
+        private void ChangePasswordExecute()
+        {
+            ViewChangePassword = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Checks if its possible to press the button
+        /// </summary>
+        /// <returns></returns>
+        private bool CanChangePasswordExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Cancel button
+        /// </summary>
+        private ICommand cancel;
+        public ICommand Cancel
+        {
+            get
+            {
+                if (cancel == null)
+                {
+                    cancel = new RelayCommand(param => CancelExecute(), param => CanCancelExecute());
+                }
+                return cancel;
+            }
+        }
+
+        /// <summary>
+        /// Cancel
+        /// </summary>
+        private void CancelExecute()
+        {
+            MessageBoxResult dialog = Xceed.Wpf.Toolkit.MessageBox.Show("Are you sure you wan to cancel?", "Cancel", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (dialog == MessageBoxResult.Yes)
+            {
+                ViewChangePassword = Visibility.Collapsed;
+                userProfileWindow.newPassword.Clear();
+                userProfileWindow.oldPassword.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to press the button
+        /// </summary>
+        /// <returns></returns>
+        private bool CanCancelExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Save button
+        /// </summary>
+        private ICommand save;
+        public ICommand Save
+        {
+            get
+            {
+                if (save == null)
+                {
+                    save = new RelayCommand(SaveExecute, param => CanSaveExecute());
+                }
+                return save;
+            }
+        }
+
+        /// <summary>
+        /// Save
+        /// </summary>
+        private void SaveExecute(object obj)
+        {
+            string password = (obj as PasswordBox).Password;
+            LoggedInUser.CurrentUser.UserPassword = password;
+            userData.AddUser(LoggedInUser.CurrentUser);
+
+            // Hash current user password
+            LoggedInUser.CurrentUser.UserPassword = PasswordHasher.Hash(password);
+
+            ViewChangePassword = Visibility.Collapsed;
+            userProfileWindow.newPassword.Clear();
+            userProfileWindow.oldPassword.Clear();
+            userProfileWindow.error.Visibility = Visibility.Visible;
+
+            InfoLabel = $"Successfuly updated the password.";
+            InfoLabelBG = "#FF8BC34A";
+            SnackUserInfo();
+        }
+
+        /// <summary>
+        /// Checks if its possible to press the button
+        /// </summary>
+        /// <returns></returns>
+        private bool CanSaveExecute()
+        {
+            if (PasswordHasher.Verify(userProfileWindow.oldPassword.Password.ToString(), LoggedInUser.CurrentUser.UserPassword) == true)
+            {
+                userProfileWindow.error.Visibility = Visibility.Collapsed;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
     }

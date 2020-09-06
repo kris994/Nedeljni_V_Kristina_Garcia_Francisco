@@ -5,8 +5,240 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nedeljni_V_Kristina_Garcia_Francisco.View"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:c="clr-namespace:Nedeljni_V_Kristina_Garcia_Francisco.Helper"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        d:DesignHeight="500"
+        d:DesignWidth="970">
     <Grid>
-        
+        <Grid MinWidth="950"
+              MinHeight="500"
+              Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Header-->
+            <Grid Grid.Row="0">
+                <Label  x:Name="lblCreateOrder"
+                        Margin="40,15,300,0"
+                        Foreground="{StaticResource PrimaryHueMidBrush}"
+                        FontWeight="Bold"
+                        FontSize="30"
+                        Height="64">My Profile</Label>
+                <Border Grid.Row="0"
+                        BorderThickness="0"
+                        Margin="30,65,30,0"
+                        Height="10"
+                        Background="#505050"
+                        CornerRadius="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"></Border>
+            </Grid>
+            <materialDesign:Snackbar 
+                    Height="40" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,0"
+                    IsActive="False"
+                    x:Name="InfoMessage"
+                    FontSize="16"
+                    Background="{Binding InfoLabelBG}"
+                    FontFamily="{DynamicResource MaterialDesignFont}"
+                    >
+                <materialDesign:SnackbarMessage Content="{Binding InfoLabel}"
+                                                    HorizontalContentAlignment="Center"
+                                                    Margin="0,0,0,0"
+                                                    Height="40"
+                                                    Width="400"
+                                                    FontWeight="Bold"
+                                                    Foreground="Black"
+                                                    ActionCommand="{Binding SnackUserInfo}" />
+            </materialDesign:Snackbar>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="txtFirstName" 
+                                 HorizontalAlignment="Left"
+                                 materialDesign:HintAssist.Hint="First Name"
+                                 Width="130"
+                                 HorizontalContentAlignment="Left"
+                                 Text="{Binding User.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 Margin="0,0,17,0"
+                                 MaxLength="40"
+                                 SelectionBrush="#FF8BC34A" 
+                                 IsReadOnly="True"/>
+                <TextBox x:Name="txtLastName" 
+                                 HorizontalAlignment="Right"
+                                 materialDesign:HintAssist.Hint="Last Name"
+                                 Width="130"                              
+                                 HorizontalContentAlignment="Left"
+                                 Text="{Binding User.LastName, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 Margin="17,0,0,0"
+                                 MaxLength="40"
+                                 IsReadOnly="True"
+                                 SelectionBrush="#FF8BC34A" ></TextBox>
+            </StackPanel>
+            <TextBox x:Name="txtEmail" Grid.Row="3"
+                                 materialDesign:HintAssist.Hint="Email"
+                                 HorizontalAlignment="Center"
+                                 Width="300"
+                                 HorizontalContentAlignment="Left"
+                                 Text="{Binding User.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 MaxLength="40"
+                                 ToolTip="Example: test@test.com"
+                                 IsReadOnly="True"
+                                 SelectionBrush="#FF8BC34A" />
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="txtDateOfBirth" 
+                                 HorizontalAlignment="Left"
+                                 materialDesign:HintAssist.Hint="Date of Birth"
+                                 Width="130"                              
+                                 HorizontalContentAlignment="Left"
+                                 IsReadOnly="True"
+                                 Text="{Binding User.DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 Margin="0,0,17,0"
+                                 MaxLength="40"
+                                 SelectionBrush="#FF8BC34A" ></TextBox>
+                <TextBox x:Name="txtGender" 
+                                 HorizontalAlignment="Right"
+                                 materialDesign:HintAssist.Hint="Gender"
+                                 Width="130"            
+                                 IsReadOnly="True"
+                                 HorizontalContentAlignment="Left"
+                                 Text="{Binding User.Gender, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 Margin="17,0,0,0"
+                                 MaxLength="40"
+                                 SelectionBrush="#FF8BC34A" ></TextBox>
+            </StackPanel>
+            <TextBox x:Name="txtAddress" Grid.Row="5"
+                                 materialDesign:HintAssist.Hint="Address"
+                                 HorizontalAlignment="Center"
+                                 Width="300"
+                                 MaxLength="50"
+                                 IsReadOnly="True"
+                                 HorizontalContentAlignment="Left"
+                                 Text="{Binding User.UserLocation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 SelectionBrush="#FF8BC34A" />
+            <Button x:Name="btnChangePassword"
+                        Grid.Row="6"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        ToolTip="Change Password"
+                        HorizontalAlignment="Center"
+                        Width="297"
+                        Foreground="White"
+                        Command="{Binding ChangePassword, UpdateSourceTrigger=PropertyChanged}"
+                        Height="35"
+                        Background="#FF8BC34A"
+                        VerticalAlignment="Bottom"
+                        Content="Change Password"
+                        BorderBrush="{x:Null}" Margin="338,0,335,15"></Button>
+            <Border BorderThickness="3"  Visibility="{Binding ViewChangePassword}" BorderBrush="#505050" Grid.Row="7" Grid.RowSpan="3" Width="400" Height="140" HorizontalAlignment="Center"></Border>
+            <Grid Grid.Row="8" Visibility="{Binding ViewChangePassword}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -20, 0, 20">
+                    <PasswordBox x:Name="oldPassword"
+                                 HorizontalAlignment="Left"
+                                 materialDesign:HintAssist.Hint="Old Password"
+                                 Width="130"                              
+                                 HorizontalContentAlignment="Left"
+                                 Height="50"
+                                 Margin="0,0,17,0"
+                                 MaxLength="40"
+                                 SelectionBrush="#FF8BC34A"
+                                 PasswordBox.PasswordChanged="txtChanged"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
+                    <PasswordBox x:Name="newPassword" 
+                                 HorizontalAlignment="Right"
+                                 materialDesign:HintAssist.Hint="New Password"
+                                 Width="130"            
+                                 HorizontalContentAlignment="Left"
+                                 Height="50"
+                                 Margin="17,0,0,0"
+                                 MaxLength="40"
+                                 SelectionBrush="#FF8BC34A" 
+                                 ToolTip="Minimum 5 characters"
+                                 PasswordBox.PasswordChanged="txtChanged"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="9" Visibility="{Binding ViewChangePassword}">
+                <TextBlock     x:Name="error"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="11"
+                               FontStyle="Italic"
+                               Margin="338,-20,0,0"
+                               Foreground="Red"
+                               Visibility="Visible"
+                               Text="Please enter the current password."></TextBlock>
+                <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -20, 0, 20">
+                    <Button x:Name="btnSave"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        ToolTip="Save"
+                        HorizontalAlignment="Center"
+                        Width="130"
+                        Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
+                        Height="35"
+                        Background="#FF8BC34A"
+                        VerticalAlignment="Bottom"
+                        Content="Save"
+                        BorderBrush="{x:Null}" Margin="0,0,17,0"
+                        CommandParameter="{Binding ElementName=newPassword}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=oldPassword, Path=Text}" Value="">
+                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=newPassword, Path=Password}" Value="">
+                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="btnCancel"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        ToolTip="Cancel"
+                        HorizontalAlignment="Center"
+                        Width="130"
+                        Foreground="White"
+                        Command="{Binding Cancel, UpdateSourceTrigger=PropertyChanged}"
+                        Height="35"
+                        Background="#FFC34A4A"
+                        VerticalAlignment="Bottom"
+                        Content="Cancel"
+                        BorderBrush="{x:Null}" Margin="17,0,0,0"></Button>
+                </StackPanel>
+            </Grid>
+            <Image HorizontalAlignment="Left" Height="125" Margin="190,20,0,0" Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Top" Width="130" Source="/Nedeljni_V_Kristina_Garcia_Francisco;component/Assets/Picture/account.jpg"/>
+        </Grid>
     </Grid>
 </UserControl>

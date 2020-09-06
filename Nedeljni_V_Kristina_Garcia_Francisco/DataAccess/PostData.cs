@@ -23,7 +23,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                 {
                     List<tblPost> list = new List<tblPost>();
                     list = (from x in context.tblPosts select x).ToList();
-                    return list;
+                    return list.OrderByDescending(x => x.DateOfPost).ToList();
                 }
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                     }
                 }
 
-                return list;
+                return list.OrderByDescending(x => x.DateOfPost).ToList();
             }
             catch (Exception ex)
             {

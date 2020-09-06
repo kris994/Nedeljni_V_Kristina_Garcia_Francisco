@@ -237,6 +237,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         private void RegisterUserExecute()
         {
             ViewRegistration = Visibility.Visible;
+            view.border.Width = 800;
         }
 
         /// <summary>
@@ -287,7 +288,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
                             Email = UserList[i].Email,
                             DateOfBirth = UserList[i].DateOfBirth,
                             UserLocation = UserList[i].UserLocation,
-                            Gender = User.Gender,
+                            Gender = UserList[i].Gender,
                             Username = UserList[i].Username,
                             UserPassword = UserList[i].UserPassword
                         };

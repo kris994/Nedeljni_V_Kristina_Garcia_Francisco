@@ -237,6 +237,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         public async void SnackPendingInfo()
         {
+            await Task.Delay(1000);
             allPandingWindow.InfoMessage.IsActive = true;
             await Task.Delay(3000);
             allPandingWindow.InfoMessage.IsActive = false;

@@ -38,8 +38,8 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
                     };
             var menuProfile = new List<Subitem>
                     {
-                        new Subitem("Profile", new UserProfileWindow()),
-                        new Subitem($"Your Posts", new UserPostsWindow()),
+                        new Subitem("My Profile", new UserProfileWindow()),
+                        new Subitem($"My Posts", new UserPostsWindow()),
                     };
             var item1 = new ItemMenu("Friends", menuUsers, PackIconKind.Twitter);
             var item2 = new ItemMenu("Profile", menuProfile, PackIconKind.Account);

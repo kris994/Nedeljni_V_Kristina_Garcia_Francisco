@@ -96,7 +96,7 @@
                                  Height="45"
                                  Margin="0,0,17,0"
                                  MaxLength="40"
-                                 IsEnabled="False"
+                                 IsReadOnly="True"
                                  SelectionBrush="#FF8BC34A" />
                         <TextBox x:Name="txtLastName" 
                                  HorizontalAlignment="Right"
@@ -108,7 +108,7 @@
                                  Height="45"
                                  Margin="17,0,0,0"
                                  MaxLength="40"
-                                 IsEnabled="False"
+                                 IsReadOnly="True"
                                  SelectionBrush="#FF8BC34A" ></TextBox>
                     </StackPanel>
                     <TextBox x:Name="txtEmail" Grid.Row="3"
@@ -121,7 +121,7 @@
                                  Height="45"
                                  MaxLength="40"
                                  ToolTip="Example: test@test.com"
-                                 IsEnabled="False"
+                                 IsReadOnly="True"
                                  SelectionBrush="#FF8BC34A" />
                     <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBox x:Name="txtDateOfBirth" 
@@ -129,7 +129,7 @@
                                  materialDesign:HintAssist.Hint="Date of Birth"
                                  Width="130"                              
                                  HorizontalContentAlignment="Left"
-                                 IsEnabled="False"
+                                 IsReadOnly="True"
                                  Text="{Binding User.DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  Height="45"
@@ -140,7 +140,7 @@
                                  HorizontalAlignment="Right"
                                  materialDesign:HintAssist.Hint="Gender"
                                  Width="130"            
-                                 IsEnabled="False"
+                                 IsReadOnly="True"
                                  HorizontalContentAlignment="Left"
                                  Text="{Binding User.Gender, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -154,7 +154,7 @@
                                  HorizontalAlignment="Center"
                                  Width="300"
                                  MaxLength="50"
-                                 IsEnabled="False"
+                                 IsReadOnly="True"
                                  HorizontalContentAlignment="Left"
                                  Text="{Binding User.UserLocation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
