@@ -4,6 +4,7 @@ using Nedeljni_V_Kristina_Garcia_Francisco.Helper;
 using Nedeljni_V_Kristina_Garcia_Francisco.Model;
 using Nedeljni_V_Kristina_Garcia_Francisco.View;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         {
             user = userProfile;
             profileWindow = profileWindowOpen;
-            PostList = postData.GetAllUserPosts(userProfile);
+            PostList = postData.GetAllUserPosts(userProfile).ToList();
             ViewPost = Visibility.Collapsed;
         }
 
@@ -379,6 +380,31 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// LikePost button
+        /// </summary>
+        private ICommand likePost;
+        public ICommand LikePost
+        {
+            get
+            {
+                if (likePost == null)
+                {
+                    likePost = new RelayCommand(param => LikePostExecute());
+                }
+                return likePost;
+            }
+        }
+
+        /// <summary>
+        /// Like Post execute
+        /// </summary>
+        private void LikePostExecute()
+        {
+            postData.AddLike(Post);
+            PostList = postData.GetAllUserPosts(user).ToList();
         }
         #endregion
     }

@@ -4,14 +4,13 @@ using System.Globalization;
 using Nedeljni_V_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_V_Kristina_Garcia_Francisco.Model;
 using System.Windows;
-using System.Collections.Generic;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.Helper
 {
     /// <summary>
     ///  Returns true if the user can see total number of likes
     /// </summary>
-    class TotalNumberVisibleConverter : IValueConverter
+    class LikeButtonVisibleConverter : IValueConverter
     {
         /// <summary>
         /// Checks if the user can see the total likes field
@@ -24,26 +23,15 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.Helper
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             UserData userData = new UserData();
-            PostData postdata = new PostData();
-            List<tblPost> allPosts = postdata.GetAllPosts();
-
             if (value != null)
             {
-                // Return visible if the post belongs to the current user
-                for (int i = 0; i < allPosts.Count; i++)
-                {
-                    if (allPosts[i].UserID == (int)value && allPosts[i].UserID == LoggedInUser.CurrentUser.UserID)
-                    {
-                        return Visibility.Visible;
-                    }
-                }
                 if (userData.CheckIfFriend((int)value, LoggedInUser.CurrentUser) == true)
                 {
-                    return Visibility.Collapsed;
+                    return Visibility.Visible;
                 }
                 else
                 {
-                    return Visibility.Visible;
+                    return Visibility.Collapsed;
                 }
             }
             return value;

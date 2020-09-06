@@ -21,6 +21,10 @@
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <c:UsernameIDConverter x:Key="UsernameIDConverter" />
+        <c:TotalNumberVisibleConverter x:Key="TotalNumberVisibleConverter" />
+        <c:LikeButtonVisibleConverter x:Key="LikeButtonVisibleConverter" />
+        <c:CanLikeConverter x:Key="CanLikeConverter" />
+        <c:LikeButtonContentConverter x:Key="LikeButtonContentConverter" />
     </Window.Resources>
     <Grid>
         <Border BorderBrush="#505050"
@@ -161,7 +165,7 @@
                                  Height="45"
                                  SelectionBrush="#FF8BC34A" />
                     <Button Grid.Row="7" Grid.Column="1"
-                                    x:Name="btnIzlaz"
+                                    x:Name="btnExit"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     materialDesign:ButtonAssist.CornerRadius="20"
                                     ToolTip="Show Posts"
@@ -226,6 +230,11 @@
             </Label></TextBlock>
 
                     <ListView Grid.Row="2" Name="DataGridPost" ItemsSource="{Binding PostList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Post, UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="SelectCurrentItem"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderThickness="3" BorderBrush="#505050">
@@ -234,7 +243,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="30"></RowDefinition>
                                                 <RowDefinition Height="100"></RowDefinition>
-                                                <RowDefinition Height="20"></RowDefinition>
+                                                <RowDefinition Height="40"></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <TextBlock Grid.Row="0"
                                            Margin="30 0 0 0"
@@ -242,6 +251,12 @@
                                            FontSize="20"
                                            Text="{Binding UserID, Converter={StaticResource ResourceKey=UsernameIDConverter}}"
                                            VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Row="0"
+                                           Margin="0,20,20,0"
+                                           FontSize="12"
+                                           Text="{Binding DateOfPost, StringFormat=\{0:dd.MM.yyyy\}}"
+                                           VerticalAlignment="Center"                               
+                                           HorizontalAlignment="Right"></TextBlock>
                                             <TextBlock Grid.Row="1"
                                            Margin="20"
                                            FontSize="16"
@@ -249,18 +264,29 @@
                                            FontWeight="Light"
                                            TextWrapping="Wrap"></TextBlock>
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                                <Button x:Name="btnLikePost"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            materialDesign:ButtonAssist.CornerRadius="20"
+                                            ToolTip="Like Post"
+                                            Margin="20,0,0,10"
+                                            HorizontalAlignment="Left"
+                                            Width="100"
+                                            Foreground="White"
+                                            Visibility="{Binding UserID, Converter={StaticResource LikeButtonVisibleConverter}}"
+                                            Command="{Binding DataContext.LikePost, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                            IsEnabled="{Binding PostID, Converter={StaticResource CanLikeConverter}}"
+                                            Height="30"
+                                            Background="#FF8BC34A"
+                                            VerticalAlignment="Bottom"
+                                            Content="{Binding PostID, Converter={StaticResource LikeButtonContentConverter}}"
+                                            BorderBrush="{x:Null}"></Button>
                                                 <TextBlock 
                                            Margin="20 0 0 0"
                                            FontSize="12"
+                                           Visibility="{Binding UserID, Converter={StaticResource TotalNumberVisibleConverter}}"
                                            Text="{Binding NumberOfLikes, StringFormat='Total Likes: {0}'}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"></TextBlock>
-                                                <TextBlock
-                                           Margin="20 0 0 0"
-                                           FontSize="12"
-                                           Text="{Binding DateOfPost, StringFormat=\{0:dd.MM.yyyy\}}"
-                                           VerticalAlignment="Center"                               
-                                           HorizontalAlignment="Right"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </StackPanel>

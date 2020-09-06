@@ -210,6 +210,32 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         {
             return true;
         }
+
+        /// <summary>
+        /// LikePost button
+        /// </summary>
+        private ICommand likePost;
+        public ICommand LikePost
+        {
+            get
+            {
+                if (likePost == null)
+                {
+                    likePost = new RelayCommand(param => LikePostExecute());
+                }
+                return likePost;
+            }
+        }
+
+        /// <summary>
+        /// Like Post execute
+        /// </summary>
+        private void LikePostExecute()
+        {
+            postData.AddLike(Post);
+            PostList = postData.GetAllPosts().ToList();
+            UserPostList = postData.GetAllUserPosts(LoggedInUser.CurrentUser).ToList();
+        }
         #endregion
     }
 }

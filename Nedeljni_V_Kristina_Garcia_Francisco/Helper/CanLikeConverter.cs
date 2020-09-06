@@ -3,18 +3,17 @@ using System.Windows.Data;
 using System.Globalization;
 using Nedeljni_V_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_V_Kristina_Garcia_Francisco.Model;
-using System.Windows;
 using System.Collections.Generic;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.Helper
 {
     /// <summary>
-    ///  Returns true if the user can see total number of likes
+    ///  Checks if the user can like the post
     /// </summary>
-    class TotalNumberVisibleConverter : IValueConverter
+    class CanLikeConverter : IValueConverter
     {
         /// <summary>
-        /// Checks if the user can see the total likes field
+        /// Checks if the user can like the post
         /// </summary>
         /// <param name="value"></param>
         /// <param name="targetType"></param>
@@ -23,27 +22,27 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.Helper
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            UserData userData = new UserData();
-            PostData postdata = new PostData();
-            List<tblPost> allPosts = postdata.GetAllPosts();
+            PostData postData = new PostData();
+            List<tblPost> allPosts = postData.GetAllPosts();
+            tblPost post = null;
 
             if (value != null)
             {
-                // Return visible if the post belongs to the current user
                 for (int i = 0; i < allPosts.Count; i++)
                 {
-                    if (allPosts[i].UserID == (int)value && allPosts[i].UserID == LoggedInUser.CurrentUser.UserID)
+                    if (allPosts[i].PostID == (int)value)
                     {
-                        return Visibility.Visible;
+                        post = allPosts[i];
                     }
                 }
-                if (userData.CheckIfFriend((int)value, LoggedInUser.CurrentUser) == true)
+
+                if (postData.IsPostLiked(post, LoggedInUser.CurrentUser) == true)
                 {
-                    return Visibility.Collapsed;
+                    return false;
                 }
                 else
                 {
-                    return Visibility.Visible;
+                    return true;
                 }
             }
             return value;

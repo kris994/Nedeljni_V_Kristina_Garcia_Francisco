@@ -91,10 +91,13 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="DataAccess\PostData.cs" />
+    <Compile Include="Helper\LikeButtonContentConverter.cs" />
     <Compile Include="Helper\DateConverter.cs" />
     <Compile Include="Helper\GenderConverter.cs" />
+    <Compile Include="Helper\CanLikeConverter.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RadioButtonConverter.cs" />
+    <Compile Include="Helper\LikeButtonVisibleConverter.cs" />
     <Compile Include="Helper\TotalNumberVisibleConverter.cs" />
     <Compile Include="Helper\UsernameIDConverter.cs" />
     <Compile Include="Helper\UserNameConverter.cs" />
