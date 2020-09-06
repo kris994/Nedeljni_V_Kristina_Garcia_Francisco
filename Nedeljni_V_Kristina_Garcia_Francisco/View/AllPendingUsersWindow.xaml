@@ -12,6 +12,21 @@
     <UserControl.Resources>
         <c:UserPandingNameConverter x:Key="UserPandingNameConverter" />
         <c:UserWaitingAcceptNameConverter x:Key="UserWaitingAcceptNameConverter" />
+
+        <Style x:Key="CustomListViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="SelectCurrentItem"/>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="Silver"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="LightGray"></Setter>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid MinWidth="950"
@@ -60,57 +75,38 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"></Border>
 
-                    <DataGrid Name="DataGridPending"
-                      ItemsSource="{Binding PendingList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding PandingUser, UpdateSourceTrigger=PropertyChanged}"
-                      IsReadOnly="True"
-                      FontSize="14"
-                      Height="auto"
-                      Width="auto"
-                      Margin="30,107,0,0"
-                      Background="White"
-                      AlternatingRowBackground="LightYellow"
-                      HorizontalContentAlignment="Left"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Left"
-                      HeadersVisibility="Column"
-                      AutoGenerateColumns="False"
-                      HorizontalGridLinesBrush="Black"
-                      BorderBrush="LightGray"
-                      BorderThickness="2"
-                      Foreground="White"
-                      FontWeight="Medium">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name"
-                                        Width="150"
-                                        Binding="{Binding User2ID, Converter={StaticResource ResourceKey=UserPandingNameConverter}}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping"
-                                        Value="Wrap" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Name="btnFriendRequestAccept" Content="Accept" 
+                    <ListView Name="DataGridPending" Grid.Row="1" Grid.Column="1" Margin="0 107 80 0" ItemsSource="{Binding PendingList, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding PandingUser, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource CustomListViewItemStyle}" AlternationCount="2">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid Height="80" Width="300">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"></RowDefinition>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0"
+                                           Margin="30 0 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="20"
+                                           Text="{Binding User1ID, Converter={StaticResource ResourceKey=UserPandingNameConverter}}"
+                                           VerticalAlignment="Center"></TextBlock>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="30 0 0 0">
+                                            <Button Name="btnFriendRequestAccept" Content="Accept" HorizontalAlignment="Left"
                                 Command="{Binding DataContext.Accept, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Name="btnFriendRequestDeny" Content="Deny" 
+                                            <Button Name="btnFriendRequestDeny" Content="Deny"  HorizontalAlignment="Right"
                                 Command="{Binding DataContext.Deny, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                            <Button Name="btnProfile" Content="Profile"  HorizontalAlignment="Right"
+                                Command="{Binding DataContext.Profile, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
                 <Grid HorizontalAlignment="Right">
                     <Label  x:Name="lblWaitAccept"
@@ -128,39 +124,29 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"></Border>
 
-                    <DataGrid Name="DataGridWaitAccept"
-                      ItemsSource="{Binding WaitingAcceptList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding PandingUser, UpdateSourceTrigger=PropertyChanged}"
-                      IsReadOnly="True"
-                      FontSize="14"
-                      Height="auto"
-                      Width="auto"
-                      Margin="-48,107,0,0"
-                      Background="White"
-                      AlternatingRowBackground="LightYellow"
-                      HorizontalContentAlignment="Left"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Left"
-                      HeadersVisibility="Column"
-                      AutoGenerateColumns="False"
-                      HorizontalGridLinesBrush="Black"
-                      BorderBrush="LightGray"
-                      BorderThickness="2"
-                      Foreground="White"
-                      FontWeight="Medium">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name"
-                                        Width="150"
-                                        Binding="{Binding User1ID, Converter={StaticResource ResourceKey=UserWaitingAcceptNameConverter}}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping"
-                                        Value="Wrap" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <ListView Name="DataGridWaitAccept" Grid.Row="1" Grid.Column="1" Margin="-60 107 0 0" ItemsSource="{Binding WaitingAcceptList, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding PandingUser, UpdateSourceTrigger=PropertyChanged}"  ItemContainerStyle="{StaticResource CustomListViewItemStyle}" AlternationCount="2">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid Height="50" Width="250">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0"
+                                           Margin="30 0 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="20"
+                                           Text="{Binding User2ID, Converter={StaticResource ResourceKey=UserWaitingAcceptNameConverter}}"
+                                           VerticalAlignment="Center"></TextBlock>
+                                        <Button Name="btnProfile" Content="Profile"  HorizontalAlignment="Right" Grid.Row="1"
+                                Command="{Binding DataContext.Profile, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </StackPanel>
         </Grid>

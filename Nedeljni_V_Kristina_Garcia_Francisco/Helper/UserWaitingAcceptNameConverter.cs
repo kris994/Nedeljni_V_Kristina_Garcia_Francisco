@@ -32,7 +32,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.Helper
             {
                 for (int i = 0; i < allPandingUsers.Count; i++)
                 {
-                    if (allPandingUsers[i].User1ID == (int)value)
+                    if (allPandingUsers[i].User2ID == (int)value)
                     {
                         relationshipUserID = allPandingUsers[i].User2ID;
                     }

@@ -245,6 +245,45 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
 
         #region Commands
         /// <summary>
+        /// Profile Button
+        /// </summary>
+        private ICommand profile;
+        public ICommand Profile
+        {
+            get
+            {
+                if (profile == null)
+                {
+                    profile = new RelayCommand(param => ProfileExecute(), param => CanProfileExecute());
+                }
+                return profile;
+            }
+        }
+
+        /// <summary>
+        /// Executes the Profile
+        /// </summary>
+        private void ProfileExecute()
+        {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("Cannot open user profile right now, please try again later." + ex);
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to execute the Profile command
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanProfileExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
         /// FriendRequest Button
         /// </summary>
         private ICommand friendRequest;
@@ -342,14 +381,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         /// <returns>true</returns>
         private bool CanAcceptExecute()
         {
-            if (PandingUser != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
         /// <summary>
@@ -401,14 +433,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         /// <returns>true</returns>
         private bool CanDenyExecute()
         {
-            if (PandingUser != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
         #endregion
     }

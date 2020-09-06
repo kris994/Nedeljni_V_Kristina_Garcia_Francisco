@@ -11,6 +11,21 @@
         d:DesignWidth="970">
     <UserControl.Resources>
         <c:FriendNameConverter x:Key="FriendNameConverter" />
+        <Style x:Key="CustomListViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="SelectCurrentItem"/>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="Silver"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="LightGray"></Setter>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
     </UserControl.Resources>
     <Grid>
         <Grid MinWidth="950"
@@ -39,40 +54,29 @@
                 <!--Dugmici-->
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid Name="DataGridStorage"
-                      Grid.Row="1"
-                      ItemsSource="{Binding FriendList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding PendingUser, UpdateSourceTrigger=PropertyChanged}"
-                      IsReadOnly="True"
-                      FontSize="14"
-                      Height="auto"
-                      Width="auto"
-                      Margin="30 20 30 0"
-                      Background="White"
-                      AlternatingRowBackground="LightYellow"
-                      HorizontalContentAlignment="Left"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Left"
-                      HeadersVisibility="Column"
-                      AutoGenerateColumns="False"
-                      HorizontalGridLinesBrush="Black"
-                      BorderBrush="LightGray"
-                      BorderThickness="2"
-                      Foreground="White"
-                      FontWeight="Medium">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name"
-                                        Width="150"
-                                        Binding="{Binding RelationshipID, Converter={StaticResource ResourceKey=FriendNameConverter}}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.TextWrapping"
-                                        Value="Wrap" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ListView Name="DataGridFriends" Grid.Row="1" Margin="0 0 0 0" ItemsSource="{Binding FriendList, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding PendingUser, UpdateSourceTrigger=PropertyChanged}"  ItemContainerStyle="{StaticResource CustomListViewItemStyle}" AlternationCount="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid Height="50" Width="250">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0"
+                                           Margin="30 0 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="20"
+                                           Text="{Binding RelationshipID, Converter={StaticResource ResourceKey=FriendNameConverter}}"
+                                           VerticalAlignment="Center"></TextBlock>
+                                    <Button Name="btnProfile" Content="Profile"  HorizontalAlignment="Right" Grid.Row="1"
+                                Command="{Binding DataContext.Profile, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </Grid>
     </Grid>

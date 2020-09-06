@@ -303,49 +303,53 @@
 
             >Between Us</TextBlock>
         <Grid Grid.Column="1" Grid.Row="1">
-            <ListView Name="DataGridPost" Grid.Row="1" Grid.Column="1" Margin="30 20 0 0" ItemsSource="{Binding PostList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Post, UpdateSourceTrigger=PropertyChanged}">
+            <ListView Name="DataGridPost" Grid.Row="1" Grid.Column="1" Margin="30 20 30 0" ItemsSource="{Binding PostList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Post, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="SelectCurrentItem"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="3" BorderBrush="#505050">
-                        <StackPanel>
-                            <Grid Height="170" Width="800">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"></RowDefinition>
-                                    <RowDefinition Height="100"></RowDefinition>
-                                    <RowDefinition Height="20"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0"
+                            <StackPanel>
+                                <Grid Height="170" Width="800">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="100"></RowDefinition>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0"
                                            Margin="30 0 0 0"
                                            FontWeight="Bold"
                                            FontSize="20"
                                            Text="{Binding UserID, Converter={StaticResource ResourceKey=UsernameIDConverter}}"
                                            VerticalAlignment="Center"></TextBlock>
-                                <TextBlock Grid.Row="1"
+                                    <TextBlock Grid.Row="1"
                                            Margin="20"
                                            FontSize="16"
                                            Text="{Binding PostText}"
                                            FontWeight="Light"
                                            TextWrapping="Wrap"></TextBlock>
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <TextBlock 
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                        <TextBlock 
                                            Margin="20 0 0 0"
                                            FontSize="12"
                                            Text="{Binding NumberOfLikes, StringFormat='Total Likes: {0}'}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"></TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                            Margin="20 0 0 0"
                                            FontSize="12"
                                            Text="{Binding DateOfPost, StringFormat=\{0:dd.MM.yyyy\}}"
                                            VerticalAlignment="Center"                               
                                            HorizontalAlignment="Right"></TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
             </ListView>
         </Grid>
         <Grid Grid.Column="1"

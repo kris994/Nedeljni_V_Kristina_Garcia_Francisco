@@ -82,7 +82,7 @@
                       FontWeight="Medium">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name"
-                                        Width="150"
+                                        Width="120"
                                         Binding="{Binding UserID, Converter={StaticResource ResourceKey=UserNameConverter}}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
@@ -92,7 +92,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Gender"
-                                        Width="150"
+                                        Width="120"
                                         Binding="{Binding Gender}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
@@ -102,7 +102,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Date Of Birth"
-                                        Width="150"
+                                        Width="120"
                                         Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
@@ -122,7 +122,7 @@
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Address"
-                                        Width="150"
+                                        Width="120"
                                         Binding="{Binding UserLocation}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
@@ -136,6 +136,15 @@
                                 <DataTemplate>
                                     <Button Name="btnFriendRequest" Content="Friend Request" 
                                 Command="{Binding DataContext.FriendRequest, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnProfile" Content="Profile" 
+                                Command="{Binding DataContext.Profile, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                         Margin="4" FontWeight="Bold"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

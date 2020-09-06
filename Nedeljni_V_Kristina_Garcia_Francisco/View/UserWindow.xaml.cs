@@ -202,12 +202,28 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
             }
         }
 
+        /// <summary>
+        /// Main page preview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnMainPage_Click(object sender, RoutedEventArgs e)
         {
             StackPanelMain.Children.Clear();
             DataGridPost.Visibility = Visibility.Visible;
             btnAddPost.Visibility = Visibility.Visible;
             btnMainPage.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Select Item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void SelectCurrentItem(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem item = (ListViewItem)sender;
+            item.IsSelected = true;
         }
     }
 }
