@@ -6,15 +6,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Main User Window
+    /// </summary>
     class UserWindowViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Main User Window
+        /// </summary>
         readonly UserWindow userWindow;
+        /// <summary>
+        /// User Posts window
+        /// </summary>
         readonly UserPostsWindow userPosts;
+        /// <summary>
+        /// Post data
+        /// </summary>
         PostData postData = new PostData(); 
 
         #region Constructor

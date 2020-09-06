@@ -10,6 +10,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class UserPostsWindow : UserControl
     {
+        /// <summary>
+        /// User Post Window
+        /// </summary>
         public UserPostsWindow()
         {
             InitializeComponent();

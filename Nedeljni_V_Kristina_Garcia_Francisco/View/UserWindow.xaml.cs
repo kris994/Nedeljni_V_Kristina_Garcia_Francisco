@@ -4,6 +4,7 @@ using Nedeljni_V_Kristina_Garcia_Francisco.Model;
 using Nedeljni_V_Kristina_Garcia_Francisco.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +19,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class UserWindow : Window
     {
-        
+        /// <summary>
+        /// User Window
+        /// </summary>
         public UserWindow()
         {
             InitializeComponent();
@@ -122,20 +125,26 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
             }
         }
 
-
+        /// <summary>
+        /// Drag the Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DragMe(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 DragMove();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                // throw;
+                Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
 
+        /// <summary>
+        /// Current time
+        /// </summary>
         private void Time()
         {
             DispatcherTimer timer = new DispatcherTimer

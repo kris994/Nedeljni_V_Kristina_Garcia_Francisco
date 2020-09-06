@@ -9,6 +9,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AllFriendWindow : UserControl
     {
+        /// <summary>
+        /// All Friend Window
+        /// </summary>
         public AllFriendWindow()
         {
             InitializeComponent();

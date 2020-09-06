@@ -8,12 +8,12 @@ using System.Collections.Generic;
 namespace Nedeljni_V_Kristina_Garcia_Francisco.Helper
 {
     /// <summary>
-    ///  Checks if the user can like the post
+    ///  Checks if the user already liked the post
     /// </summary>
     class LikeButtonContentConverter : IValueConverter
     {
         /// <summary>
-        /// Checks if the user can like the post
+        /// Checks if the user already liked the post
         /// </summary>
         /// <param name="value"></param>
         /// <param name="targetType"></param>

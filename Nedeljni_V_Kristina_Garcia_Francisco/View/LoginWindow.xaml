@@ -23,7 +23,7 @@
     <Window.Resources>
         <c:RadioButtonConverter x:Key="radioButtonConverter" />
         <c:DateConverter x:Key="dateConverter" />
-        <c:GenderConverter x:Key="genderConverter" />
+        <c:RadioButtonConverter x:Key="RadioButtonConverter" />
         <vm:tblUser x:Key="data"/>
     </Window.Resources>
     <Grid>
@@ -60,6 +60,7 @@
                                              Width="16" />
                     </Button>
                     <materialDesign:Snackbar 
+                        Panel.ZIndex="1"
                     Height="40" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Center"
@@ -271,6 +272,7 @@
                         <TextBox x:Name="txtFirstName" 
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="First Name*"
+                                 ToolTip="First Name cannot be empty"
                                  Width="130"
                                  HorizontalContentAlignment="Left"
                                  Text="{Binding User.FirstName, UpdateSourceTrigger=PropertyChanged}"
@@ -283,6 +285,7 @@
                         <TextBox x:Name="txtLastName" 
                                  HorizontalAlignment="Right"
                                  materialDesign:HintAssist.Hint="Last Name*"
+                                 ToolTip="Last Name cannot be empty"
                                  Width="130"                              
                                  HorizontalContentAlignment="Left"
                                  Text="{Binding User.LastName, UpdateSourceTrigger=PropertyChanged}"
@@ -325,14 +328,15 @@
                     <StackPanel Grid.Row="5" Orientation="Horizontal" Height="40" HorizontalAlignment="Center" Margin="10,15,0,0">
                         <Label Margin="0,8,20,0">Gender:</Label>
                         <RadioButton  GroupName="gender" Width="80" Name="cbM" Content="Male" IsChecked="{Binding User.Gender, 
-                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=Male, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+                                    Converter={StaticResource ResourceKey=RadioButtonConverter}, ConverterParameter=Male, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
                         <RadioButton  GroupName="gender" Width="80" Name="cbF" Content="Female" IsChecked="{Binding User.Gender, 
-                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=Female, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+                                    Converter={StaticResource ResourceKey=RadioButtonConverter}, ConverterParameter=Female, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
                         <RadioButton  GroupName="gender" Width="80" Name="cbX" Content="Other" IsChecked="{Binding User.Gender, 
-                                    Converter={StaticResource ResourceKey=genderConverter}, ConverterParameter=Other, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+                                    Converter={StaticResource ResourceKey=RadioButtonConverter}, ConverterParameter=Other, UpdateSourceTrigger=PropertyChanged}"></RadioButton>
                     </StackPanel>
                     <TextBox x:Name="txtAddress" Grid.Row="6"
                                  materialDesign:HintAssist.Hint="Address"
+                                 ToolTip="Address can be left empty"
                                  HorizontalAlignment="Center"
                                  Width="300"
                                  MaxLength="50"
@@ -346,6 +350,7 @@
                         <TextBox x:Name="txtNewUsername" 
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Username*"
+                                 ToolTip="Username cannot be empty"
                                  Width="130"
                                  HorizontalContentAlignment="Left"
                                  Text="{Binding User.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"

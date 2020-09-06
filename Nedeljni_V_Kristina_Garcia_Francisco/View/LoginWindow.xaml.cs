@@ -12,6 +12,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class LoginWindow : Window
     {
+        /// <summary>
+        /// Login Window
+        /// </summary>
         public LoginWindow()
         {
             InitializeComponent();

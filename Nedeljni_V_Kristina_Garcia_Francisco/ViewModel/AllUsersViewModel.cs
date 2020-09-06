@@ -58,7 +58,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         /// <summary>
         /// All Friends Window
         /// </summary>
-        /// <param name="allPandingWindowOpen">open the window</param>
+        /// <param name="allFriendWindowOpen">open the window</param>
         public AllUsersViewModel(AllFriendWindow allFriendWindowOpen)
         {
             allFriendWindow = allFriendWindowOpen;

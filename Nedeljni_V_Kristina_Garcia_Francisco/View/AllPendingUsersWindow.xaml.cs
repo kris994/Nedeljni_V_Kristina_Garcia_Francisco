@@ -1,5 +1,4 @@
 ﻿using Nedeljni_V_Kristina_Garcia_Francisco.ViewModel;
-using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -10,6 +9,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AllPendingUsersWindow : UserControl
     {
+        /// <summary>
+        /// Add Pending users Window
+        /// </summary>
         public AllPendingUsersWindow()
         {
             InitializeComponent();

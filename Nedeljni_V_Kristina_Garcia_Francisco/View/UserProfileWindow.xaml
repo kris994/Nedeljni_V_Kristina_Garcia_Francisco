@@ -45,6 +45,7 @@
                         VerticalAlignment="Stretch"></Border>
             </Grid>
             <materialDesign:Snackbar 
+                    Panel.ZIndex="1"
                     Height="40" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Center"
@@ -90,18 +91,33 @@
                                  IsReadOnly="True"
                                  SelectionBrush="#FF8BC34A" ></TextBox>
             </StackPanel>
-            <TextBox x:Name="txtEmail" Grid.Row="3"
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="txtEmail"
                                  materialDesign:HintAssist.Hint="Email"
                                  HorizontalAlignment="Center"
-                                 Width="300"
+                                 Width="130"
                                  HorizontalContentAlignment="Left"
                                  Text="{Binding User.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  Height="45"
                                  MaxLength="40"
+                                 Margin="0,0,17,0"
                                  ToolTip="Example: test@test.com"
                                  IsReadOnly="True"
                                  SelectionBrush="#FF8BC34A" />
+                <TextBox x:Name="txtUsername" 
+                                 HorizontalAlignment="Right"
+                                 materialDesign:HintAssist.Hint="Username"
+                                 Width="130"                              
+                                 HorizontalContentAlignment="Left"
+                                 Text="{Binding User.Username, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Height="45"
+                                 Margin="17,0,0,0"
+                                 MaxLength="40"
+                                 IsReadOnly="True"
+                                 SelectionBrush="#FF8BC34A" ></TextBox>
+            </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBox x:Name="txtDateOfBirth" 
                                  HorizontalAlignment="Left"

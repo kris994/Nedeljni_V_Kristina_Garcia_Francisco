@@ -13,7 +13,6 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
         /// <summary>
         /// User window
         /// </summary>
-        /// <param name="user"></param>
         public UserProfileWindow()
         {
             InitializeComponent();

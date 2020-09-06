@@ -293,7 +293,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
         /// <summary>
         /// Create Friend Request
         /// </summary>
-        /// <param name="user">The user ID we adding for friend request/param>
+        /// <param name="user">The user ID we adding for friend request</param>
         /// <returns>new relationship</returns>
         public tblRelationship CreateFriendRequest(tblUser user)
         {
@@ -324,7 +324,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
         /// <summary>
         /// Accept Friend Request
         /// </summary>
-        /// <param name="user">The user we accepting for friend request/param>
+        /// <param name="user">The user we accepting for friend request</param>
         /// <returns>edited relationship</returns>
         public tblRelationship AcceptFriendRequest(tblRelationship user)
         {
@@ -350,7 +350,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
         /// <summary>
         /// Deny Friend Request
         /// </summary>
-        /// <param name="user">The friend request we are deleting/param>
+        /// <param name="user">The friend request we are deleting</param>
         public void DenyFriendRequest(tblRelationship user)
         {
             try
@@ -371,7 +371,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
         /// <summary>
         /// Checks if the user is a friend
         /// </summary>
-        /// <param name="friend">checking if its a friend</param>
+        /// <param name="friendID">checking if its a friend</param>
         /// <param name="user">user we are checking for friends</param>
         /// <returns>true if its a friend</returns>
         public bool CheckIfFriend(int friendID, tblUser user)
@@ -384,6 +384,12 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                     return true;
                 }
             }
+
+            if (allFriends.Count == 0)
+            {
+                return false;
+            }
+
             return false;
         }
     }

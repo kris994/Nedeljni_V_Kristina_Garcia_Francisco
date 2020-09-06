@@ -12,11 +12,26 @@ using System.Windows.Input;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    ///  Every user profile
+    /// </summary>
     class ProfileViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Every user profile window
+        /// </summary>
         readonly ProfileWindow profileWindow;
+        /// <summary>
+        /// Current user profile window
+        /// </summary>
         readonly UserProfileWindow userProfileWindow;
+        /// <summary>
+        /// Post data
+        /// </summary>
         PostData postData = new PostData();
+        /// <summary>
+        /// User data
+        /// </summary>
         UserData userData = new UserData();
 
         #region Constuctor

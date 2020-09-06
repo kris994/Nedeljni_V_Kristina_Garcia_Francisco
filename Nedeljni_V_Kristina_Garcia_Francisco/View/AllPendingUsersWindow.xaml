@@ -37,6 +37,7 @@
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
             <materialDesign:Snackbar 
+                    Panel.ZIndex="1"
                     Height="40" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Center"
@@ -65,7 +66,7 @@
                         Foreground="{StaticResource PrimaryHueMidBrush}"
                         FontWeight="Bold"
                         FontSize="30"
-                        Height="64">Pending Users</Label>
+                        Height="64">Pending Friends</Label>
                     <Border Grid.Row="0"
                         BorderThickness="0"
                         Margin="30,70,103,420"

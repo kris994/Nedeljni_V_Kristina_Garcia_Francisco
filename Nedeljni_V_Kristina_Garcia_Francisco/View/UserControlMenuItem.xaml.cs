@@ -13,6 +13,11 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
         UserWindow _context;
         private bool mouseClicked;
 
+        /// <summary>
+        /// User Control Menu
+        /// </summary>
+        /// <param name="itemMenu"></param>
+        /// <param name="context"></param>
         public UserControlMenuItem(ItemMenu itemMenu, UserWindow context)
         {
             InitializeComponent();
@@ -38,6 +43,12 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
                     _context.SwitchScreen(((Subitem)((ListView)sender).SelectedItem).Screen);
             }
         }
+
+        /// <summary>
+        /// The method that determines which menu is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListViewMenu_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseClicked = true;

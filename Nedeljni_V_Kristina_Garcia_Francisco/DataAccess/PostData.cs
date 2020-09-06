@@ -7,7 +7,7 @@ using System.Linq;
 namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
 {
     /// <summary>
-    /// class used to create the post CRUD structure of the application
+    /// Class used to create the post CRUD structure of the application
     /// </summary>
     class PostData
     {
@@ -153,7 +153,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
         /// <summary>
         /// Add Like
         /// </summary>
-        /// <param name="post">The post ID we are adding a like to/param>
+        /// <param name="post">The post ID we are adding a like to</param>
         public void AddLike(tblPost post)
         {
             try

@@ -8,6 +8,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AllUsersWindow : UserControl
     {
+        /// <summary>
+        /// All User Window
+        /// </summary>
         public AllUsersWindow()
         {
             InitializeComponent();

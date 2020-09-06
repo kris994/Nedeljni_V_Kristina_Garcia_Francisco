@@ -39,6 +39,7 @@
                 <!--Dugmici-->
             </Grid>
             <materialDesign:Snackbar 
+                    Panel.ZIndex="1"
                     Height="40" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Center"

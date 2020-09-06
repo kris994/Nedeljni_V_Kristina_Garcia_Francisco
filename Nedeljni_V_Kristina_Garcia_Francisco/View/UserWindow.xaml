@@ -128,26 +128,6 @@
                         Content="Return to Main Page"
                         Visibility="Hidden"
                         BorderBrush="{x:Null}" Click="BtnMainPage_Click"></Button>
-                        <materialDesign:Snackbar 
-                    Height="40" 
-                    VerticalAlignment="Top" 
-                    HorizontalAlignment="Center"
-                    Margin="-500,0,0,0"
-                    IsActive="False"
-                    x:Name="InfoMessage"
-                    FontSize="16"
-                    Background="{Binding InfoLabelBG}"
-                    FontFamily="{DynamicResource MaterialDesignFont}"
-                    >
-                            <materialDesign:SnackbarMessage Content="{Binding InfoLabel}"
-                                                    HorizontalContentAlignment="Center"
-                                                    Margin="0,0,0,0"
-                                                    Height="40"
-                                                    Width="400"
-                                                    FontWeight="Bold"
-                                                    Foreground="Black"
-                                                    ActionCommand="{Binding SnackInfo}" />
-                        </materialDesign:Snackbar>
                         <Label x:Name="lblIme"
                                FontSize="14"
                                HorizontalContentAlignment="Right"
@@ -307,6 +287,27 @@
 
             >Between Us</TextBlock>
         <Grid Grid.Column="1" Grid.Row="1">
+            <materialDesign:Snackbar 
+                    Panel.ZIndex="1"
+                    Height="40" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,0"
+                    IsActive="False"
+                    x:Name="InfoMessage"
+                    FontSize="16"
+                    Background="{Binding InfoLabelBG}"
+                    FontFamily="{DynamicResource MaterialDesignFont}"
+                    >
+                <materialDesign:SnackbarMessage Content="{Binding InfoLabel}"
+                                                    HorizontalContentAlignment="Center"
+                                                    Margin="0,0,0,0"
+                                                    Height="40"
+                                                    Width="400"
+                                                    FontWeight="Bold"
+                                                    Foreground="Black"
+                                                    ActionCommand="{Binding SnackInfo}" />
+            </materialDesign:Snackbar>
             <ListView Name="DataGridPost" Grid.Row="1" Grid.Column="1" Margin="30 20 30 0" ItemsSource="{Binding PostList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Post, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -350,7 +351,7 @@
                                             HorizontalAlignment="Left"
                                             Width="100"
                                             Foreground="White"
-                                            Visibility="{Binding UserID, Converter={StaticResource LikeButtonVisibleConverter}}"
+                                            Visibility="{Binding PostID, Converter={StaticResource LikeButtonVisibleConverter}}"
                                             Command="{Binding DataContext.LikePost, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                             IsEnabled="{Binding PostID, Converter={StaticResource CanLikeConverter}}"
                                             Height="30"

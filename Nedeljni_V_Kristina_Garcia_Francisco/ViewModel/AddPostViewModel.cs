@@ -13,7 +13,13 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
     /// </summary>
     class AddPostViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Add Post Window
+        /// </summary>
         readonly AddPostWindow addPostWindow;
+        /// <summary>
+        /// Post Data
+        /// </summary>
         PostData postData = new PostData();
 
         #region Constructor

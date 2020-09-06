@@ -8,6 +8,9 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AddPostWindow : Window
     {
+        /// <summary>
+        /// Add Post Window
+        /// </summary>
         public AddPostWindow()
         {
             InitializeComponent();
