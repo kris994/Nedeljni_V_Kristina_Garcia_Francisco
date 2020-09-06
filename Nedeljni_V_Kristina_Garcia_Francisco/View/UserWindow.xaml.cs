@@ -36,9 +36,16 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
                         new Subitem($"Panding Friends", new AllPendingUsersWindow()),
                         new Subitem("All Friends", new AllFriendWindow()),
                     };
-            var item1 = new ItemMenu("Friends", menuUsers, PackIconKind.Account);
+            var menuProfile = new List<Subitem>
+                    {
+                        new Subitem("Profile", new UserProfileWindow()),
+                        new Subitem($"Your Posts", new UserPostsWindow()),
+                    };
+            var item1 = new ItemMenu("Friends", menuUsers, PackIconKind.Twitter);
+            var item2 = new ItemMenu("Profile", menuProfile, PackIconKind.Account);
 
             Menu.Children.Add(new UserControlMenuItem(item1, this));
+            Menu.Children.Add(new UserControlMenuItem(item2, this));
 
             //determines the current page length
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
@@ -82,6 +89,24 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
                     AllPendingUsersWindow allPendingUsersWindow = new AllPendingUsersWindow();
                     StackPanelMain.Children.Clear();
                     StackPanelMain.Children.Add(allPendingUsersWindow);
+                    DataGridPost.Visibility = Visibility.Collapsed;
+                    btnAddPost.Visibility = Visibility.Collapsed;
+                    btnMainPage.Visibility = Visibility.Visible;
+                }
+                else if (screen.Name == "UserProfileWindow")
+                {
+                    UserProfileWindow userProfileWindow = new UserProfileWindow();
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(userProfileWindow);
+                    DataGridPost.Visibility = Visibility.Collapsed;
+                    btnAddPost.Visibility = Visibility.Collapsed;
+                    btnMainPage.Visibility = Visibility.Visible;
+                }
+                else if (screen.Name == "UserPostsWindow")
+                {
+                    UserPostsWindow userPostsWindow = new UserPostsWindow();
+                    StackPanelMain.Children.Clear();
+                    StackPanelMain.Children.Add(userPostsWindow);
                     DataGridPost.Visibility = Visibility.Collapsed;
                     btnAddPost.Visibility = Visibility.Collapsed;
                     btnMainPage.Visibility = Visibility.Visible;

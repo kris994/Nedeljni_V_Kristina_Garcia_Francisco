@@ -11,15 +11,32 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
     class ProfileViewModel : ViewModelBase
     {
         readonly ProfileWindow profileWindow;
+        readonly UserProfileWindow userProfileWindow;
         PostData postData = new PostData();
 
         #region Constuctor
+        /// <summary>
+        /// Any user Profile window
+        /// </summary>
+        /// <param name="profileWindowOpen">opens the window</param>
+        /// <param name="userProfile">user</param>
         public ProfileViewModel(ProfileWindow profileWindowOpen, tblUser userProfile)
         {
             user = userProfile;
             profileWindow = profileWindowOpen;
             PostList = postData.GetAllUserPosts(userProfile);
             ViewPost = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Loggedin user Profile window
+        /// </summary>
+        /// <param name="userProfileWindowOpen">opens the window</param>
+        /// <param name="userProfile">user</param>
+        public ProfileViewModel(UserProfileWindow userProfileWindowOpen, tblUser userProfile)
+        {
+            LoggedInUser.CurrentUser = userProfile;
+            userProfileWindow = userProfileWindowOpen;
         }
         #endregion
 

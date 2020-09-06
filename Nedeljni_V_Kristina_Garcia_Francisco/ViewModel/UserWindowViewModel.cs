@@ -4,7 +4,9 @@ using Nedeljni_V_Kristina_Garcia_Francisco.Model;
 using Nedeljni_V_Kristina_Garcia_Francisco.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
@@ -12,6 +14,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
     class UserWindowViewModel : ViewModelBase
     {
         readonly UserWindow userWindow;
+        readonly UserPostsWindow userPosts;
         PostData postData = new PostData(); 
 
         #region Constructor
@@ -22,7 +25,19 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         public UserWindowViewModel(UserWindow userWindowOpen)
         {
             this.userWindow = userWindowOpen;
-            PostList = postData.GetAllPosts();
+            PostList = postData.GetAllPosts().ToList();
+        }
+
+        /// <summary>
+        /// Logged in User window
+        /// </summary>
+        /// <param name="userPostsOpen">Opens user window</param>
+        /// <param name="user">Loggedin user</param>
+        public UserWindowViewModel(UserPostsWindow userPostsOpen, tblUser user)
+        {
+            userPosts = userPostsOpen;
+            user = LoggedInUser.CurrentUser;
+            UserPostList = postData.GetAllUserPosts(LoggedInUser.CurrentUser).ToList();
         }
         #endregion
 
@@ -41,6 +56,23 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
             {
                 postList = value;
                 OnPropertyChanged("PostList");
+            }
+        }
+
+        /// <summary>
+        /// List of user posts
+        /// </summary>
+        private List<tblPost> userPostList;
+        public List<tblPost> UserPostList
+        {
+            get
+            {
+                return userPostList;
+            }
+            set
+            {
+                userPostList = value;
+                OnPropertyChanged("UserPostList");
             }
         }
 
@@ -96,7 +128,6 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
         }
         #endregion
 
-
         #region SnackBarInfo
         /// <summary>
         /// Snack bar user info showing
@@ -106,6 +137,16 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
             userWindow.InfoMessage.IsActive = true;
             await Task.Delay(3000);
             userWindow.InfoMessage.IsActive = false;
+        }
+
+        /// <summary>
+        /// Snack bar user info showing
+        /// </summary>
+        public async void SnackUserInfo()
+        {
+            userPosts.InfoMessage.IsActive = true;
+            await Task.Delay(3000);
+            userPosts.InfoMessage.IsActive = false;
         }
         #endregion
 
@@ -141,10 +182,19 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
                 {
                     InfoLabel = $"Created a new post";
                     InfoLabelBG = "#FF8BC34A";
-                    SnackInfo();
+
+                    if (userWindow == null)
+                    {
+                        SnackUserInfo();
+                    }
+                    else
+                    {
+                        SnackInfo();
+                    }
                 }
 
                 PostList = postData.GetAllPosts();
+                UserPostList = postData.GetAllUserPosts(LoggedInUser.CurrentUser).ToList();
             }
             catch (Exception ex)
             {
