@@ -12,6 +12,7 @@
         d:DesignWidth="970">
     <UserControl.Resources>
         <c:UsernameIDConverter x:Key="UsernameIDConverter" />
+        <c:TotalNumberVisibleConverter x:Key="TotalNumberVisibleConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid MinWidth="950"
@@ -103,8 +104,9 @@
                                            FontSize="12"
                                            Text="{Binding NumberOfLikes, StringFormat='Total Likes: {0}'}"
                                            VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"></TextBlock>
-                                            <TextBlock
+                                           HorizontalAlignment="Left">
+                                            </TextBlock>
+                                          <TextBlock
                                            Margin="20 0 0 0"
                                            FontSize="12"
                                            Text="{Binding DateOfPost, StringFormat=\{0:dd.MM.yyyy\}}"

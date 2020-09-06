@@ -18,6 +18,7 @@
         MouseLeftButtonDown="DragMe">
     <Window.Resources>
         <c:UsernameIDConverter x:Key="UsernameIDConverter" />
+        <c:TotalNumberVisibleConverter x:Key="TotalNumberVisibleConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -336,7 +337,8 @@
                                            Margin="20 0 0 0"
                                            FontSize="12"
                                            Text="{Binding NumberOfLikes, StringFormat='Total Likes: {0}'}"
-                                           VerticalAlignment="Center"
+                                           VerticalAlignment="Center"                                       
+                                           Visibility="{Binding UserID, Converter={StaticResource TotalNumberVisibleConverter}}"
                                            HorizontalAlignment="Left"></TextBlock>
                                         <TextBlock
                                            Margin="20 0 0 0"

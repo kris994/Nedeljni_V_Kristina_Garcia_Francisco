@@ -367,5 +367,24 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.DataAccess
                 Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
+
+        /// <summary>
+        /// Checks if the user is a friend
+        /// </summary>
+        /// <param name="friend">checking if its a friend</param>
+        /// <param name="user">user we are checking for friends</param>
+        /// <returns>true if its a friend</returns>
+        public bool CheckIfFriend(int friendID, tblUser user)
+        {
+            List<tblRelationship> allFriends = GetAllFriends(user).ToList();
+            for (int i = 0; i < allFriends.Count; i++)
+            {
+                if (allFriends[i].User1ID == friendID || allFriends[i].User2ID == friendID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
