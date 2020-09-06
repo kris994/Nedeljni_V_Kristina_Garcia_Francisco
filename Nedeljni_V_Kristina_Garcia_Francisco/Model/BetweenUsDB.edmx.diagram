@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6576c86ac4574d8d82dcf3b108e62bc5" Name="Diagram1">
+      <Diagram DiagramId="85547156949e4a40b07d98195a5d29de" Name="Diagram1">
         <EntityTypeShape EntityType="BetweenUsDBModel.tblPost" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BetweenUsDBModel.tblPostLike" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BetweenUsDBModel.tblRelationship" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BetweenUsDBModel.tblUser" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <AssociationConnector Association="BetweenUsDBModel.FK__tblPost__UserID__5A846E65" ManuallyRouted="false" />
-        <AssociationConnector Association="BetweenUsDBModel.FK__tblPostLi__PostI__5D60DB10" ManuallyRouted="false" />
-        <AssociationConnector Association="BetweenUsDBModel.FK__tblPostLi__UserI__5E54FF49" ManuallyRouted="false" />
-        <AssociationConnector Association="BetweenUsDBModel.FK__tblRelati__User1__56B3DD81" ManuallyRouted="false" />
-        <AssociationConnector Association="BetweenUsDBModel.FK__tblRelati__User2__57A801BA" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblPost__UserID__75035A77" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblPostLi__PostI__77DFC722" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblPostLi__UserI__78D3EB5B" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblRelati__User1__7132C993" ManuallyRouted="false" />
+        <AssociationConnector Association="BetweenUsDBModel.FK__tblRelati__User2__7226EDCC" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

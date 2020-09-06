@@ -10,7 +10,7 @@
             <PropertyRef Name="PostID" />
           </Key>
           <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DateOfPost" Type="date" Nullable="false" />
+          <Property Name="DateOfPost" Type="datetime" Nullable="false" />
           <Property Name="PostText" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="NumberOfLikes" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -46,7 +46,7 @@
           <Property Name="Username" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="UserPassword" Type="char" MaxLength="1000" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblPost__UserID__5A846E65">
+        <Association Name="FK__tblPost__UserID__75035A77">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblPost" Type="Self.tblPost" Multiplicity="*" />
           <ReferentialConstraint>
@@ -58,7 +58,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblPostLi__PostI__5D60DB10">
+        <Association Name="FK__tblPostLi__PostI__77DFC722">
           <End Role="tblPost" Type="Self.tblPost" Multiplicity="1" />
           <End Role="tblPostLikes" Type="Self.tblPostLikes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -70,7 +70,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblPostLi__UserI__5E54FF49">
+        <Association Name="FK__tblPostLi__UserI__78D3EB5B">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblPostLikes" Type="Self.tblPostLikes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -82,7 +82,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRelati__User1__56B3DD81">
+        <Association Name="FK__tblRelati__User1__7132C993">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -94,7 +94,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRelati__User2__57A801BA">
+        <Association Name="FK__tblRelati__User2__7226EDCC">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,23 +111,23 @@
           <EntitySet Name="tblPostLikes" EntityType="Self.tblPostLikes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRelationship" EntityType="Self.tblRelationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblPost__UserID__5A846E65" Association="Self.FK__tblPost__UserID__5A846E65">
+          <AssociationSet Name="FK__tblPost__UserID__75035A77" Association="Self.FK__tblPost__UserID__75035A77">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblPost" EntitySet="tblPost" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblPostLi__PostI__5D60DB10" Association="Self.FK__tblPostLi__PostI__5D60DB10">
+          <AssociationSet Name="FK__tblPostLi__PostI__77DFC722" Association="Self.FK__tblPostLi__PostI__77DFC722">
             <End Role="tblPost" EntitySet="tblPost" />
             <End Role="tblPostLikes" EntitySet="tblPostLikes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblPostLi__UserI__5E54FF49" Association="Self.FK__tblPostLi__UserI__5E54FF49">
+          <AssociationSet Name="FK__tblPostLi__UserI__78D3EB5B" Association="Self.FK__tblPostLi__UserI__78D3EB5B">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblPostLikes" EntitySet="tblPostLikes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRelati__User1__56B3DD81" Association="Self.FK__tblRelati__User1__56B3DD81">
+          <AssociationSet Name="FK__tblRelati__User1__7132C993" Association="Self.FK__tblRelati__User1__7132C993">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblRelationship" EntitySet="tblRelationship" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRelati__User2__57A801BA" Association="Self.FK__tblRelati__User2__57A801BA">
+          <AssociationSet Name="FK__tblRelati__User2__7226EDCC" Association="Self.FK__tblRelati__User2__7226EDCC">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblRelationship" EntitySet="tblRelationship" />
           </AssociationSet>
@@ -142,12 +142,12 @@
             <PropertyRef Name="PostID" />
           </Key>
           <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateOfPost" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfPost" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PostText" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumberOfLikes" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblPost__UserID__5A846E65" FromRole="tblPost" ToRole="tblUser" />
-          <NavigationProperty Name="tblPostLikes" Relationship="Self.FK__tblPostLi__PostI__5D60DB10" FromRole="tblPost" ToRole="tblPostLikes" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblPost__UserID__75035A77" FromRole="tblPost" ToRole="tblUser" />
+          <NavigationProperty Name="tblPostLikes" Relationship="Self.FK__tblPostLi__PostI__77DFC722" FromRole="tblPost" ToRole="tblPostLikes" />
         </EntityType>
         <EntityType Name="tblPostLike">
           <Key>
@@ -156,8 +156,8 @@
           <Property Name="PostLikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PostID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblPost" Relationship="Self.FK__tblPostLi__PostI__5D60DB10" FromRole="tblPostLikes" ToRole="tblPost" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblPostLi__UserI__5E54FF49" FromRole="tblPostLikes" ToRole="tblUser" />
+          <NavigationProperty Name="tblPost" Relationship="Self.FK__tblPostLi__PostI__77DFC722" FromRole="tblPostLikes" ToRole="tblPost" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblPostLi__UserI__78D3EB5B" FromRole="tblPostLikes" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblRelationship">
           <Key>
@@ -167,8 +167,8 @@
           <Property Name="RelationshipStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="User1ID" Type="Int32" Nullable="false" />
           <Property Name="User2ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblRelati__User1__56B3DD81" FromRole="tblRelationship" ToRole="tblUser" />
-          <NavigationProperty Name="tblUser1" Relationship="Self.FK__tblRelati__User2__57A801BA" FromRole="tblRelationship" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblRelati__User1__7132C993" FromRole="tblRelationship" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="Self.FK__tblRelati__User2__7226EDCC" FromRole="tblRelationship" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -183,12 +183,12 @@
           <Property Name="UserLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserPassword" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblPosts" Relationship="Self.FK__tblPost__UserID__5A846E65" FromRole="tblUser" ToRole="tblPost" />
-          <NavigationProperty Name="tblPostLikes" Relationship="Self.FK__tblPostLi__UserI__5E54FF49" FromRole="tblUser" ToRole="tblPostLikes" />
-          <NavigationProperty Name="tblRelationships" Relationship="Self.FK__tblRelati__User1__56B3DD81" FromRole="tblUser" ToRole="tblRelationship" />
-          <NavigationProperty Name="tblRelationships1" Relationship="Self.FK__tblRelati__User2__57A801BA" FromRole="tblUser" ToRole="tblRelationship" />
+          <NavigationProperty Name="tblPosts" Relationship="Self.FK__tblPost__UserID__75035A77" FromRole="tblUser" ToRole="tblPost" />
+          <NavigationProperty Name="tblPostLikes" Relationship="Self.FK__tblPostLi__UserI__78D3EB5B" FromRole="tblUser" ToRole="tblPostLikes" />
+          <NavigationProperty Name="tblRelationships" Relationship="Self.FK__tblRelati__User1__7132C993" FromRole="tblUser" ToRole="tblRelationship" />
+          <NavigationProperty Name="tblRelationships1" Relationship="Self.FK__tblRelati__User2__7226EDCC" FromRole="tblUser" ToRole="tblRelationship" />
         </EntityType>
-        <Association Name="FK__tblPost__UserID__5A846E65">
+        <Association Name="FK__tblPost__UserID__75035A77">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblPost" Type="Self.tblPost" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblPostLi__PostI__5D60DB10">
+        <Association Name="FK__tblPostLi__PostI__77DFC722">
           <End Role="tblPost" Type="Self.tblPost" Multiplicity="1" />
           <End Role="tblPostLikes" Type="Self.tblPostLike" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblPostLi__UserI__5E54FF49">
+        <Association Name="FK__tblPostLi__UserI__78D3EB5B">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblPostLikes" Type="Self.tblPostLike" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRelati__User1__56B3DD81">
+        <Association Name="FK__tblRelati__User1__7132C993">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -236,7 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRelati__User2__57A801BA">
+        <Association Name="FK__tblRelati__User2__7226EDCC">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblRelationship" Type="Self.tblRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,23 +253,23 @@
           <EntitySet Name="tblPostLikes" EntityType="Self.tblPostLike" />
           <EntitySet Name="tblRelationships" EntityType="Self.tblRelationship" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-          <AssociationSet Name="FK__tblPost__UserID__5A846E65" Association="Self.FK__tblPost__UserID__5A846E65">
+          <AssociationSet Name="FK__tblPost__UserID__75035A77" Association="Self.FK__tblPost__UserID__75035A77">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblPost" EntitySet="tblPosts" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblPostLi__PostI__5D60DB10" Association="Self.FK__tblPostLi__PostI__5D60DB10">
+          <AssociationSet Name="FK__tblPostLi__PostI__77DFC722" Association="Self.FK__tblPostLi__PostI__77DFC722">
             <End Role="tblPost" EntitySet="tblPosts" />
             <End Role="tblPostLikes" EntitySet="tblPostLikes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblPostLi__UserI__5E54FF49" Association="Self.FK__tblPostLi__UserI__5E54FF49">
+          <AssociationSet Name="FK__tblPostLi__UserI__78D3EB5B" Association="Self.FK__tblPostLi__UserI__78D3EB5B">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblPostLikes" EntitySet="tblPostLikes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRelati__User1__56B3DD81" Association="Self.FK__tblRelati__User1__56B3DD81">
+          <AssociationSet Name="FK__tblRelati__User1__7132C993" Association="Self.FK__tblRelati__User1__7132C993">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblRelationship" EntitySet="tblRelationships" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRelati__User2__57A801BA" Association="Self.FK__tblRelati__User2__57A801BA">
+          <AssociationSet Name="FK__tblRelati__User2__7226EDCC" Association="Self.FK__tblRelati__User2__7226EDCC">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblRelationship" EntitySet="tblRelationships" />
           </AssociationSet>

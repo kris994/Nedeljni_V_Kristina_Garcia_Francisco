@@ -194,7 +194,7 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.ViewModel
                 DateOfBirth = User.DateOfBirth,
                 UserLocation = User.UserLocation,
                 Username = User.Username,
-                UserPassword = User.UserPassword
+                UserPassword = PasswordHasher.Hash(User.UserPassword)
             };
 
             ViewRegistration = Visibility.Collapsed;

@@ -244,6 +244,10 @@ namespace Nedeljni_V_Kristina_Garcia_Francisco.View
         private void BtnMainPage_Click(object sender, RoutedEventArgs e)
         {
             StackPanelMain.Children.Clear();
+            UserWindow window = new UserWindow();
+            window.Show();
+            this.Close();
+
             DataGridPost.Visibility = Visibility.Visible;
             btnAddPost.Visibility = Visibility.Visible;
             btnMainPage.Visibility = Visibility.Hidden;

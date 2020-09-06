@@ -30,7 +30,7 @@ CREATE TABLE tblRelationship(
 
  CREATE TABLE tblPost (
     PostID			INT IDENTITY(1,1) PRIMARY KEY		NOT NULL,
-	DateOfPost		DATE								NOT NULL,
+	DateOfPost		DATETIME								NOT NULL,
 	PostText		VARCHAR(100)						NOT NULL,
 	NumberOfLikes	INT									NOT NULL,
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID)	NOT NULL,

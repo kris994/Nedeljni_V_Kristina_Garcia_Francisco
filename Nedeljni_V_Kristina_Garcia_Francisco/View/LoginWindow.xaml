@@ -187,6 +187,7 @@
                                                 Width="100"
                                                 Margin="10,0,0,0"
                                                 FontWeight="Bold"
+                                                BorderBrush="{x:Null}"
                                                 Command="{Binding RegisterUser, UpdateSourceTrigger=PropertyChanged}"
                                                 Foreground="#505050" Background="#FFFF6107">Register</Button>
                             </StackPanel>

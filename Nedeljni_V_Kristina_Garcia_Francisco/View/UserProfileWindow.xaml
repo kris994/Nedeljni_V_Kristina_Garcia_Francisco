@@ -216,6 +216,8 @@
                         Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
                         Height="35"
                         Background="#FF8BC34A"
+                        Foreground="#505050"
+                        FontWeight="Bold"
                         VerticalAlignment="Bottom"
                         Content="Save"
                         BorderBrush="{x:Null}" Margin="0,0,17,0"
